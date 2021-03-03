@@ -35,5 +35,7 @@ npm run serve
 
 
 
+##  Effect display
 
+![demo](https://github.com/fengtianxi001/Large_screen_display/blob/main/screenShot/demo.gif?raw=true)
 
