@@ -1,6 +1,8 @@
 ## Large_screen_display
 
+##  Effect display
 
+![demo](https://github.com/fengtianxi001/Figure-bed/blob/main/images/LargeScreenDisplay/1.gif?raw=true)
 
 ##  Project introduction
 
@@ -35,7 +37,5 @@ npm run serve
 
 
 
-##  Effect display
 
-![demo](https://github.com/fengtianxi001/Large_screen_display/blob/main/screenShot/demo.gif?raw=true)
 
