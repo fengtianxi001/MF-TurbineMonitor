@@ -1,4 +1,4 @@
-## Large_screen_display
+# Large_screen_display
 
 ##  Effect display
 
