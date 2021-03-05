@@ -1,5 +1,10 @@
 <template>
-    <ul class="equipmentLabel" ref="demo" :class="{ hide: labelHide }">
+    <ul
+        class="equipmentLabel"
+        ref="demo"
+        :class="{ hide: labelHide }"
+        @click="labelHide = true"
+    >
         <li></li>
         <li class="labelInfo">
             <div>
@@ -21,7 +26,6 @@
 <script>
 /* eslint-disable */
 import * as THREE from "three";
-// import * as $ from "jquery";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RenderPass, EffectComposer, OutlinePass } from "three-outlinepass";
@@ -39,6 +43,7 @@ export default {
             mouse: new THREE.Vector2(),
             raycaster: new THREE.Raycaster(),
             equipment: null,
+            equipmentMaterialMap: new Map(),
             wholeGroup: new THREE.Group(),
             plane: null,
             wholeGroupall: new THREE.Group(),
@@ -258,6 +263,14 @@ export default {
             loader.load(url, object => {
                 let mesh = object.scene;
                 this.equipment = mesh;
+                mesh.traverse(child => {
+                    if (child.isMesh) {
+                        const material = child.material.clone();
+                        child.material = material;
+                        // console.log(material.uuid)
+                        this.equipmentMaterialMap.set(child.name, child);
+                    }
+                });
                 let scale = 0.0003 * 1;
                 mesh.scale.set(scale, scale, scale);
                 mesh.rotateX(Math.PI / 2);
@@ -320,7 +333,7 @@ export default {
                 this.updateLabal(intersects[0]);
             }
         },
-        outline(selectedObjects) {
+        outline(selectedObjects, color = 0x15c5e8) {
             const { renderer, camera, scene } = this.global;
             const [w, h] = [window.innerWidth, window.innerHeight];
             var compose = new EffectComposer(renderer);
@@ -344,8 +357,8 @@ export default {
             };
             outlinePass.edgeStrength = params.edgeStrength;
             outlinePass.edgeGlow = params.edgeGlow;
-            outlinePass.visibleEdgeColor.set(0xec272f);
-            outlinePass.hiddenEdgeColor.set(0xec272f);
+            outlinePass.visibleEdgeColor.set(color);
+            outlinePass.hiddenEdgeColor.set(color);
             compose.render(scene, camera);
             this.$set(this.global, "compose", compose);
         },
@@ -400,6 +413,36 @@ export default {
             this.labelHide = false;
             const point = intersect.point;
             this.turbineLabel.position.set(point.x, point.y, point.z);
+        },
+        alarm() {
+            const nameList = [
+                "pasted__extrudedSurface2",
+                "pasted__extrudedSurface8",
+                "pasted__group59_pCylinder158",
+                "pasted__pCube70",
+                "pasted__pCube97",
+                "polySurface152",
+                "polySurface156",
+                "polySurface230",
+                "polySurface258"
+            ];
+            setInterval(() => {
+                const random = parseInt(Math.random() * 9);
+                const equipment = this.equipmentMaterialMap.get(
+                    nameList[random]
+                );
+                if (equipment) {
+                    equipment.material.emissive.setHex(equipment.currentHex);
+                }
+                equipment.currentHex = equipment.material.emissive.getHex();
+                equipment.material.emissive.setHex(0xff0000);
+                setTimeout(() => {
+                    if (equipment)
+                        equipment.material.emissive.setHex(
+                            equipment.currentHex
+                        );
+                }, 4000);
+            }, 5000);
         }
     },
     mounted() {
@@ -408,6 +451,7 @@ export default {
         this.loadingPlane();
         this.updataTurbineYawAngle();
         this.createTurbineLabel();
+        this.alarm();
         this.global.scene.add(this.wholeGroup);
         document.addEventListener("click", this.onPointerClick);
     }
