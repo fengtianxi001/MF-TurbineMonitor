@@ -7,7 +7,7 @@
 <script>
 import { WebGLRenderer, Clock } from "three";
 import { CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer";
-import TWEEN from "@tweenjs/tween.js"
+import TWEEN from "@tweenjs/tween.js";
 
 export default {
     name: "TRenderer",
@@ -17,17 +17,17 @@ export default {
             default: () => {
                 return {
                     w: 640,
-                    h: 400,
+                    h: 400
                 };
             },
-            validator: function (size) {
+            validator: function(size) {
                 return size.w && size.h ? true : false;
-            },
-        },
+            }
+        }
     },
     provide() {
         return {
-            global: this.global,
+            global: this.global
         };
     },
     data() {
@@ -44,9 +44,9 @@ export default {
                 camera: null,
                 mixers: new Map(),
                 compose: null,
-                CSSRender: new CSS2DRenderer(),
+                CSSRender: new CSS2DRenderer()
             },
-            clock: new Clock(),
+            clock: new Clock()
         };
     },
     methods: {
@@ -59,14 +59,14 @@ export default {
             stats && stats.update();
             var delta = new Clock().getDelta();
             // console.log(compose);
-            compose&&compose.render(delta);
+            compose && compose.render(delta);
             requestAnimationFrame(this.render);
             const mixerUpdateDelta = this.clock.getDelta();
-            this.global.mixers.forEach((mixer) => {
+            this.global.mixers.forEach(mixer => {
                 mixer.update(mixerUpdateDelta);
             });
-            TWEEN.update()
-        },
+            TWEEN.update();
+        }
     },
     mounted() {
         const { size } = this;
@@ -77,7 +77,7 @@ export default {
         this.$refs.container.appendChild(CSSRender.domElement);
         this.$refs.container.appendChild(this.renderer.domElement);
         this.render();
-    },
+    }
 };
 </script>
 <style lang='scss' scoped>
