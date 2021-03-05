@@ -1,23 +1,20 @@
-<template>
-    <div></div>
-</template>
 <script>
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 export default {
     name: "TControls",
     inject: ["global"],
-    mounted(){
+    mounted() {
         /*esline-disable */
-        const {camera,CSSRender} = this.global
-        let controls = new OrbitControls(camera, CSSRender.domElement)
+        const { camera, CSSRender } = this.global;
+        let controls = new OrbitControls(camera, CSSRender.domElement);
         // controls.minDistance = 0.2;
         // controls.maxDistance = 2.0;
         controls.maxPolarAngle = Math.PI / 2.5;
-        this.global.controls = controls
-        this.global.controls.enablePan = false
+        this.global.controls = controls;
+        this.global.controls.enablePan = false;
+    },
+    render(){
+        return null 
     }
-}
+};
 </script>
-<style lang='scss' scoped>
-
-</style>
