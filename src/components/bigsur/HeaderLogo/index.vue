@@ -1,6 +1,5 @@
 <template>
 	<div class="header">
-		<img src="../../../assets/icon/LOGO.png" alt="logo">
 		<ul>
 			<li>Large-scale wind turbines</li>
 			<li>大型风力发电机</li>

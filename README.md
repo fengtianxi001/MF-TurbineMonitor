@@ -1,41 +1,31 @@
-# Large_screen_display
+# 🚀 three-geo-tiles-server
+    
+    
+    
+<div>
+  <img src="https://img.shields.io/github/languages/top/fengtianxi001/turbine_large_screen">
+  <img src="https://travis-ci.org/boennemann/badges.svg?branch=master">
+  <img src="https://img.shields.io/github/issues/fengtianxi001/turbine_large_screen">
+  <img src="https://img.shields.io/github/forks/fengtianxi001/turbine_large_screen">
+  <img src="https://img.shields.io/github/stars/fengtianxi001/turbine_large_screen">
+</div>
+    
+    
+    
+### 简介
+这是一个模仿图扑的3d风机可视化大屏
 
-##  Effect display
-
-![demo](https://github.com/fengtianxi001/Figure-bed/blob/main/images/LargeScreenDisplay/1.gif?raw=true)
-
-##  Project introduction
-
-This is a three.js project built by Vue-cli。The knowledge points involved in the project: 
-
-- Configuration of three environment; 
-- Import of model; 
-- Call of model animation; 
-- Click event of model 
-- Outline of model 
-- css2d-object
-
-
-
-The project was completed in spare time, the production level may be rough, please understand
+### [在线体验](http://112.124.22.244/turbine-large-screen/index.html)
 
 
 
-##  How to use
-
-```
-npm install
-```
+### 效果图
+    
+![avatar](http://112.124.22.244/figure_bed/turbine_large_screen/01.png)
 
 
 
-##  How to start
-
-```
-npm run serve
-```
-
-
-
-
-
+    
+    
+    
+    
