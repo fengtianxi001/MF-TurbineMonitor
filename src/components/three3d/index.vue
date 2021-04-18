@@ -6,7 +6,7 @@
             <t-controls></t-controls>
             <t-light></t-light>
             <t-light></t-light>
-            <t-raycaster></t-raycaster>
+            <!-- <t-raycaster></t-raycaster> -->
             <TTurebine></TTurebine>
         </t-renderer>
     </div>

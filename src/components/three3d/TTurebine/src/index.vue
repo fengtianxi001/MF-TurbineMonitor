@@ -217,20 +217,11 @@ export default {
     },
     methods: {
         loadTurbine() {
-            const url = "/model/untitled1.glb";
-            let loader = new GLTFLoader();
-            const dracoLoader = new DRACOLoader();
-            dracoLoader.setDecoderPath("/draco/");
-            dracoLoader.preload();
-            loader.setDRACOLoader(dracoLoader);
-            loader.load(url, object => {
+            const loader = new GLTFLoader()
+            loader.load(`${process.env.BASE_URL}model/untitled1.glb`, object => {
                 this.matrixTurbine = object;
                 let mesh = object.scene;
                 this.mesh = mesh;
-
-                // this.plane.dispose()
-                // console.log(this.mesh);
-                // this.mesh.remove(this.plane)
                 this.metal = mesh.getObjectByName("颜色材质");
                 this.wireframe = mesh.getObjectByName("线框材质");
                 this.metal.visible = false;
@@ -239,28 +230,16 @@ export default {
                 mesh.scale.set(scale, scale, scale);
                 mesh.rotateX(Math.PI / 2);
                 mesh.rotateY(-Math.PI / 2);
-                //----
                 const plane = object.scene.getObjectByName("polySurface136");
                 mesh.remove(plane);
-                // this.plane = plane.clone()
-                // plane.visible = false
-                // this.wholeGroup.add(this.plane)
-                // console.log(this.plane);
-                //---
                 this.wholeGroup.add(mesh);
-
                 mesh.position.set(0, 0, -2.42);
                 this.changeAnimation(mesh, "Anim_0");
             });
         },
         loadEquipment() {
-            const url = "/model/equipment.glb";
             let loader = new GLTFLoader();
-            const dracoLoader = new DRACOLoader();
-            dracoLoader.setDecoderPath("/draco/");
-            dracoLoader.preload();
-            loader.setDRACOLoader(dracoLoader);
-            loader.load(url, object => {
+            loader.load(`${process.env.BASE_URL}model/equipment.glb`, object => {
                 let mesh = object.scene;
                 this.equipment = mesh;
                 mesh.traverse(child => {
@@ -282,13 +261,8 @@ export default {
             });
         },
         loadingPlane() {
-            const url = "/model/plane.glb";
             let loader = new GLTFLoader();
-            const dracoLoader = new DRACOLoader();
-            dracoLoader.setDecoderPath("/draco/");
-            dracoLoader.preload();
-            loader.setDRACOLoader(dracoLoader);
-            loader.load(url, object => {
+            loader.load(`${process.env.BASE_URL}model/plane.glb`, object => {
                 let mesh = object.scene;
                 // this.equipment = mesh;
                 let scale = 0.0003 * 1;
