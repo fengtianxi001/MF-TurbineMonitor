@@ -14,7 +14,7 @@
                 </header>
                 <ul>
                     <li v-for="(item, index) in nowLabelData.list" :key="index">
-                        <span>{{ item.name }}</span>
+                        <span>{{ item.name }}:</span>
                         <span>{{ item.value }}</span>
                         <span>{{ item.unit }}</span>
                     </li>
@@ -27,7 +27,6 @@
 /* eslint-disable */
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { RenderPass, EffectComposer, OutlinePass } from "three-outlinepass";
 import { CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer";
 import TWEEN from "@tweenjs/tween.js";
@@ -218,7 +217,11 @@ export default {
     methods: {
         loadTurbine() {
             const loader = new GLTFLoader()
+            const onProgress=xhr=>{
+                this.$emit("progress",xhr.loaded/xhr.total*100)
+            }
             loader.load(`${process.env.BASE_URL}model/untitled1.glb`, object => {
+                this.$emit("complete")
                 this.matrixTurbine = object;
                 let mesh = object.scene;
                 this.mesh = mesh;
@@ -235,7 +238,8 @@ export default {
                 this.wholeGroup.add(mesh);
                 mesh.position.set(0, 0, -2.42);
                 this.changeAnimation(mesh, "Anim_0");
-            });
+            },onProgress);
+            
         },
         loadEquipment() {
             let loader = new GLTFLoader();
@@ -470,15 +474,16 @@ export default {
             background-color: #04669e73;
             border: 1px solid #15c5e8;
             box-sizing: border-box;
-            padding: 5px 20px;
+            padding: 20px 20px;
             header {
                 width: 100%;
                 // height: 40px;
                 text-align: left;
                 font-size: 14px;
+                line-height: 20px;
                 color: #fff;
                 border-bottom: 1px dashed aqua;
-                padding-bottom: 5px;
+                padding-bottom: 14px;
                 .en {
                     font-size: 12px;
                     color: aqua;
@@ -491,14 +496,14 @@ export default {
                     line-height: 30px;
                     font-size: 14px;
                     display: flex;
-                    justify-content: space-between;
+                    // justify-content: space-between;
                     text-align: left;
                     align-items: center;
                     span:nth-child(1) {
                         width: 40%;
                     }
                     span:nth-child(2) {
-                        width: 30%;
+                        width: 10%;
                         color: #f0c002;
                     }
                     span:nth-child(3) {
