@@ -24,8 +24,8 @@
 
 ### 说明
 
-	-  用`vue3-typeScript`对原有项目进行重构,`vue2`版本可以在[Releases](https://github.com/fengtianxi001/Three-LargeScreen/releases/tag/v.1.0.0)中获取
-	-  作为一个简单的Demo,一些功能没有去探索实现.希望后续有时间能够陆续的完善它
+	用`vue3-typeScript`对原有项目进行重构,`vue2`版本可以在 [Releases] (https://github.com/fengtianxi001/Three-LargeScreen/releases/tag/v.1.0.0) 中获取
+	作为一个简单的Demo,一些功能没有去探索实现.希望后续有时间能够陆续的完善它
 
 ### [在线体验](http://112.124.22.244/turbine-large-screen/index.html)
 
