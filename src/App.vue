@@ -1,21 +1,18 @@
+<!--
+ * @Description: 
+ * @Autor: 肛肠科冯主任
+ * @Date: 2022-01-05 16:22:21
+ * @LastEditTime: 2022-01-06 13:38:59
+-->
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+	<router-view />
 </template>
-<script>
-export default {
-  data() {
-    return {};
-  },
-};
-</script>
-<style lang="scss">
+
+<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  height: 100%;
-  color: #2c3e50;
-  width: 100%;
+	width: 100vw;
+	height: 100vh;
+	background-color: #040b1a;
+	overflow: hidden;
 }
 </style>
