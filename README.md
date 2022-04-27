@@ -1,7 +1,4 @@
 # 🚀 Turbine-LargeScreen
-
-
-​    
 <div>
   <img src="https://img.shields.io/github/languages/top/fengtianxi001/turbine_large_screen">
   <img src="https://travis-ci.org/boennemann/badges.svg?branch=master">
@@ -10,8 +7,6 @@
   <img src="https://img.shields.io/github/stars/fengtianxi001/turbine_large_screen">
 </div>
 
-​    
-​    
 ### 简介
 这是一个模仿图扑的风机大屏.主要内容有
 
@@ -19,7 +14,6 @@
   - vue2版本把three.js的基本元素(如scene,camera...)封装成组件
   - vue3封装成class类
 - 对导入的风机模型进行数据绑定(点击高亮,告警提示,偏航角转动等)
-
 
 
 ### 说明

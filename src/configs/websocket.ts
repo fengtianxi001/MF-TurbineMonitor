@@ -1,0 +1,1 @@
+export const WSURL = "ws://localhost:8888"
