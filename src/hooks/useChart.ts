@@ -1,19 +1,36 @@
-/*
- * @Description:
- * @Autor: 肛肠科冯主任
- * @Date: 2022-01-05 23:08:41
- * @LastEditTime: 2022-01-08 00:08:41
- */
- /*eslint-disable*/
-import * as echarts from 'echarts'
-import { onMounted, Ref } from 'vue'
-type EChartsOption = echarts.EChartsOption
+import * as echarts from "echarts";
+import { onMounted, ref, Ref, onBeforeUnmount } from "vue";
 
-const useChart = (chart: Ref<HTMLElement | null>, option: EChartsOption) => {
-	onMounted(() => {
-		const mychart = echarts.init(chart.value as HTMLElement)
-		mychart.setOption(option as EChartsOption)
-	})
+export function useChart(
+  dom: Ref<HTMLElement | null>,
+  option: echarts.EChartsOption
+) {
+  const chart = ref<echarts.ECharts | null>(null);
+  const dispose = chart.value?.dispose();
+  const refresh = (option: echarts.EChartsOption) => {
+    chart.value?.setOption(option);
+  };
+  let onResize: {
+    (): void;
+    (this: Window, ev: UIEvent): any;
+    (this: Window, ev: UIEvent): any;
+  };
+  onMounted(() => {
+    chart.value = echarts.init(dom.value as HTMLElement);
+    chart.value.setOption(option);
+    // onResize = () => {
+    //   chart.value?.resize();
+    // };
+    // window.addEventListener("resize", onResize)
+  });
+  onBeforeUnmount(() => {
+    // window.removeEventListener("resize", onResize)
+    chart.value?.dispose();
+  });
+
+  return {
+    chart,
+    dispose,
+    refresh,
+  };
 }
-
-export default useChart

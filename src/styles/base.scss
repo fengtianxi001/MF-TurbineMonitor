@@ -1,0 +1,30 @@
+%v-center {
+  display: flex;
+  align-items: center;
+}
+%h-center {
+  display: flex;
+  justify-content: center;
+}
+%h-between {
+  display: flex;
+  justify-content: space-between;
+}
+%vh-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%scrollbar {
+  overflow-y: scroll;
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #15c4e7ab;
+  }
+  &::-webkit-scrollbar {
+    width: 2px;
+    border-radius: 10px;
+    background-color: transparet;
+  }
+}
