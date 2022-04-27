@@ -7,26 +7,38 @@
   <img src="https://img.shields.io/github/stars/fengtianxi001/turbine_large_screen">
 </div>
 
-### 简介
-这是一个模仿图扑的风机大屏.主要内容有
+## 简介
+这是一个模仿图扑的风机大屏, 项目主要做了如下内容：
+- 编写了一个简易`node-websocket`服务器, 模拟开发环境下风机数据的订阅,。使用`hooks`配合自定义`websocket`类的消息中心(发布订阅模式), 简化数据订阅和处理流程。
+- 对`Three.js`的封装进行优化。
+- 对导入的风机模型进行数据绑定, 使风机能够更具数据源做出相应的形态调整
 
-- 对`three.js`的封装进行思考
-  - vue2版本把three.js的基本元素(如scene,camera...)封装成组件
-  - vue3封装成class类
-- 对导入的风机模型进行数据绑定(点击高亮,告警提示,偏航角转动等)
+## 启动
+
+###
+```shell
+npm run serve
+```
+
+###
+```shell
+npm run dev
+```
 
 
-### 说明
+## 说明
 
-用vue3-typeScript对原有项目进行重构,vue2版本可以在 [Releases](https://github.com/fengtianxi001/Three-LargeScreen/releases/tag/v.1.0.0) 中获取
+- `master`分支版本是使用`vue3-ts-vite`对原有的`vue2`版本进行重构, 在功能和样式上会有些差异, 如果需要使用`vue2`版本, 可在切换到`vue2`分支。
 
-作为一个简单的Demo,一些功能没有去探索实现.希望后续有时间能够陆续的完善它
+- 作为一个`Demo`项目, 有许多功能需要去探索实现, 后续有学习到新的内容, 将会不断的补充和完善。
 
-### [在线体验](http://112.124.22.244/turbine-large-screen/index.html)
 
-### 效果图
+## 在线预览(版本可能落后)
+[http://112.124.22.244/turbine-large-screen/index.html](http://112.124.22.244/turbine-large-screen/index.html)
 
-![demo](https://github.com/fengtianxi001/Three-LargeScreen/blob/main/screenshot/1.png?raw=true)
+### 效果图(版本可能落后)
+
+![效果图](https://github.com/fengtianxi001/Three-LargeScreen/blob/main/screenshot/1.png?raw=true)
 
 
 
