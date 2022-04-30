@@ -8,7 +8,7 @@
     </ul>
 </template>
 <script setup lang="ts">
-import { computed, defineProps, StyleValue, Ref } from 'vue'
+import { computed, StyleValue, Ref } from 'vue'
 import { messageListType } from "./types"
 interface propsType {
     data: Array<messageListType>
