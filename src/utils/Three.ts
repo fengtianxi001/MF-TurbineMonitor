@@ -1,6 +1,6 @@
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
-THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1);
+// THREE.Object3D.DefaultUp = new THREE.Vector3(0, 0, 1);
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer";
 import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
@@ -45,6 +45,8 @@ class Three {
     this.scene.add(this.group);
     this.initialize();
     this.renderCallback = []
+    const axesHelper = new THREE.AxesHelper(500);
+    this.scene.add(axesHelper);
   }
   initialize() {
     this.createCamera();
@@ -56,13 +58,15 @@ class Three {
     // this.createPass()
   }
   createCamera() {
-    this.camera.position.set(-2, 2, 2);
-    this.camera.lookAt(this.scene.position);
+    this.camera.position.set(-2, 4, 4);
+    // this.camera.lookAt(0, 10, 0);
   }
   createRenderer() {
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container.appendChild(this.renderer.domElement);
+    this.renderer.clippingPlanes = Object.freeze([]);
+    this.renderer.localClippingEnabled = true;
   }
   createCSSRender() {
     this.CSSRender.setSize(window.innerWidth, window.innerHeight);
@@ -72,6 +76,8 @@ class Three {
   }
   createControl() {
     this.control = new OrbitControls(this.camera, this.CSSRender.domElement);
+    this.control.target = new THREE.Vector3(0, 2.5, 0)
+    this.control.update()
   }
   createRender() {
     this.render = () => {

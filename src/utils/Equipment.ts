@@ -19,9 +19,9 @@ class Equipment {
     this.equipments = mesh;
     const scale = 0.0003 * 1;
     mesh.scale.set(scale, scale, scale);
-    mesh.rotateX(Math.PI / 2);
-    mesh.rotateY(-Math.PI / 2);
-    mesh.position.set(0, 0, -2.42);
+    // mesh.rotateX(Math.PI / 2);
+    // mesh.rotateY(-Math.PI / 2);
+    mesh.position.set(0, 0, 0);
     mesh.traverse((child) => {
       // console.log(child)
       if (child.type === "Mesh") {
