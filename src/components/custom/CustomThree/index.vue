@@ -24,11 +24,11 @@ onMounted(() => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
 
-        
+
 
         threeInstance.addRenderCallback(() => {
             const count = texture.repeat.y
-            if (count <= 5) {
+            if (count <= 10) {
                 texture.repeat.x += 0.01;
                 texture.repeat.y += 0.02;
                 // texture.offset.x += 10;
@@ -41,9 +41,7 @@ onMounted(() => {
         let mesh = object.scene
         let scale = 0.0003 * 1
         mesh.scale.set(scale, scale, scale)
-        mesh.rotateX(Math.PI / 2)
-        mesh.rotateY(-Math.PI / 2)
-        mesh.position.set(0, 0, -2.42)
+        mesh.position.set(0, 0, 0);
         threeInstance.addObject(mesh)
     })
 })
