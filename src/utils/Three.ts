@@ -5,8 +5,13 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer";
 import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AnimationClip } from "three";
-
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+// import { import.meta.env } from "vite";
+console.log(import.meta.env)
 class Three {
+  [x: string]: any;
   container: HTMLElement;
   scene: THREE.Scene;
   camera: THREE.PerspectiveCamera;
@@ -18,7 +23,9 @@ class Three {
   clock: THREE.Clock;
   compose: any;
   group: THREE.Group;
+  composer: EffectComposer | null
   constructor(container: HTMLElement) {
+    this.composer = null
     this.container = container;
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(
@@ -30,7 +37,7 @@ class Three {
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.CSSRender = new CSS2DRenderer();
     this.control = null;
-    this.render = () => {};
+    this.render = () => { };
     this.mixers = [];
     this.clock = new THREE.Clock();
     this.compose = null;
@@ -45,6 +52,7 @@ class Three {
     this.createControl();
     this.createRender();
     this.createLights();
+    // this.createPass()
   }
   createCamera() {
     this.camera.position.set(-2, 2, 2);
@@ -74,6 +82,9 @@ class Three {
         mixer.update(mixerUpdateDelta);
       });
       this.compose && this.compose.render(delta);
+      if (this.composer) {
+        this.composer.render()
+      }
       TWEEN.update();
     };
   }
@@ -89,6 +100,21 @@ class Three {
       this.scene.add(spotLight);
     });
   }
+  createPass() {
+    const renderScene = new RenderPass(this.scene, this.camera);
+    var bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5,
+      0.4,
+      0.85
+    );
+    bloomPass.threshold = 0;
+    bloomPass.strength = .1;
+    bloomPass.radius = 0;
+    this.composer = new EffectComposer(this.renderer);
+    this.composer.addPass(renderScene);
+    this.composer.addPass(bloomPass);
+  }
   addObject(object: THREE.Object3D) {
     this.scene.add(object);
     return this
@@ -97,9 +123,9 @@ class Three {
     this.group.add(object);
     return this
   }
-  loadGLTF(src: string, onProgress = (progress: number) => {}) {
+  loadGLTF(src: string, onProgress = (progress: number) => { }) {
     const loader = new GLTFLoader();
-    const url = `http://192.168.3.45:3000/model/${src}`;
+    const url = `${import.meta.env.VITE_API_DOMAIN}/model/${src}`;
     return new Promise<GLTF>((resolve) => {
       loader.load(
         url,
