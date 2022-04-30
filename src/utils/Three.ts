@@ -32,7 +32,7 @@ class Three {
       20,
       window.innerWidth / window.innerHeight,
       0.1,
-      500
+      2000
     );
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.CSSRender = new CSS2DRenderer();
@@ -44,6 +44,7 @@ class Three {
     this.group = new THREE.Group();
     this.scene.add(this.group);
     this.initialize();
+    this.renderCallback = []
   }
   initialize() {
     this.createCamera();
@@ -85,8 +86,12 @@ class Three {
       if (this.composer) {
         this.composer.render()
       }
+      this.renderCallback.map((callback: () => any) => callback())
       TWEEN.update();
     };
+  }
+  addRenderCallback(callback: any) {
+    this.renderCallback.push(callback)
   }
   createLights() {
     const lights = [

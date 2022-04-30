@@ -13,14 +13,14 @@
   <CustomThree></CustomThree>
 </template>
 <script lang="ts" setup>
-import CustomEnMonitor from "components/Custom/CustomEnMonitor/index.vue"
-import CustomEnergyMonitor from "components/Custom/CustomEnergyMonitor/index.vue"
-import CustomTotalMonitor from "components/Custom/CustomTotalMonitor/index.vue"
-import CustomLogo from "components/Custom/CustomLogo/index.vue"
-import CustomPitchMonitor from "components/Custom/CustomPitchMonitor/index.vue"
-import CustomActiveMonitor from "components/Custom/CustomActiveMonitor/index.vue"
-import CustomErrorMonitor from "components/Custom/CustomErrorMonitor/index.vue"
-import CustomThree from "components/Custom/CustomThree/index.vue"
+import CustomEnMonitor from "components/custom/CustomEnMonitor/index.vue"
+import CustomEnergyMonitor from "components/custom/CustomEnergyMonitor/index.vue"
+import CustomTotalMonitor from "components/custom/CustomTotalMonitor/index.vue"
+import CustomLogo from "components/custom/CustomLogo/index.vue"
+import CustomPitchMonitor from "components/custom/CustomPitchMonitor/index.vue"
+import CustomActiveMonitor from "components/custom/CustomActiveMonitor/index.vue"
+import CustomErrorMonitor from "components/custom/CustomErrorMonitor/index.vue"
+import CustomThree from "components/custom/CustomThree/index.vue"
 
 
 </script>
