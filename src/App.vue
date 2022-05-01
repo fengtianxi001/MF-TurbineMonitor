@@ -1,26 +1,27 @@
 <template>
   <div class="left">
-    <CustomLogo></CustomLogo>
-    <CustomEnMonitor></CustomEnMonitor>
-    <CustomEnergyMonitor></CustomEnergyMonitor>
-    <CustomTotalMonitor></CustomTotalMonitor>
+    <Logo />
+    <DashboardTemperature />
+    <DashboardEnergy />
+    <DashboardTotalParams />
   </div>
   <div class="right">
-    <CustomPitchMonitor></CustomPitchMonitor>
-    <CustomActiveMonitor></CustomActiveMonitor>
-    <CustomErrorMonitor></CustomErrorMonitor>
+    <DashboardYawAngle />
+    <DashboardActive />
+    <DashboardError />
   </div>
-  <CustomThree></CustomThree>
+  <Dashboard3D></Dashboard3D>
 </template>
 <script lang="ts" setup>
-import CustomEnMonitor from "components/custom/CustomEnMonitor/index.vue"
-import CustomEnergyMonitor from "components/custom/CustomEnergyMonitor/index.vue"
-import CustomTotalMonitor from "components/custom/CustomTotalMonitor/index.vue"
-import CustomLogo from "components/custom/CustomLogo/index.vue"
-import CustomPitchMonitor from "components/custom/CustomPitchMonitor/index.vue"
-import CustomActiveMonitor from "components/custom/CustomActiveMonitor/index.vue"
-import CustomErrorMonitor from "components/custom/CustomErrorMonitor/index.vue"
-import CustomThree from "components/custom/CustomThree/index.vue"
+import Logo from "components/base/base-logo.vue"
+import DashboardTemperature from "components/dashboard/dashboard-temperature.vue"
+import DashboardEnergy from "components/dashboard/dashboard-energy.vue"
+import DashboardTotalParams from "components/dashboard/dashboard-totalParams.vue"
+
+import DashboardYawAngle from "components/dashboard/dashboard-yawAngle.vue"
+import DashboardActive from "components/dashboard/dashboard-active.vue"
+import DashboardError from "components/dashboard/dashboard-error.vue"
+import Dashboard3D from "components/dashboard/dashboard-3d.vue"
 
 
 </script>
