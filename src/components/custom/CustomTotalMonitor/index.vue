@@ -16,7 +16,7 @@ import BMessageList from "components/Base/BMessageList.vue"
 import { panelTitleType } from "components/Base/types";
 import { ref } from "vue";
 import { useChart } from "hooks/useChart";
-import { createNormalLineConfig } from "configs/chart/normalLine";
+import { createNormalLineOptions } from "utils/createNormalLineOptions";
 import { useSocket } from "@/hooks/useSocket";
 const title: panelTitleType = {
     cn: "参数统计",
@@ -50,7 +50,7 @@ const messageDate = [
     },
 ]
 const container = ref<null | HTMLElement>(null)
-const { refresh } = useChart(container, createNormalLineConfig())
+const { refresh } = useChart(container, createNormalLineOptions())
 
 useSocket({
     params: {
@@ -60,7 +60,7 @@ useSocket({
         return response.data
     },
     onUpdate(formatterResult) {
-        refresh(createNormalLineConfig(formatterResult))
+        refresh(createNormalLineOptions(formatterResult))
     }
 })
 </script>
