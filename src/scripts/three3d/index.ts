@@ -7,20 +7,33 @@ import { BaseOptionsType, animationPropsType } from "./types";
 // @ts-ignore
 import { RenderPass, EffectComposer, OutlinePass } from "three-outlinepass";
 class Three3D extends ThreeBase {
-    equipmentMaterialMap: Map<string, THREE.Mesh>;
+    equipmentMaterialMap: Map<string,
+        THREE.Mesh>;
     equipments: THREE.Group;
     constructor(element: HTMLElement, options?: BaseOptionsType) {
         super(element, options)
         this.equipmentMaterialMap = new Map()
-        this.equipments = new THREE.Group
+        this.equipments = new THREE.Group()
         this.addLights()
         this.adjustConfigs()
+        if (this.groups.has("turbine")) {
+            this.groups.get("turbine")?.add(this.equipments)
+        } else {
+            this.createGroup("turbine").add(this.equipments)
+        }
+
     }
     addLights() {
         const lights = [
-            [100, 100, 100],
-            [-100, 100, 100],
-            [100, -100, 100],
+            [
+                100, 100, 100
+            ],
+            [
+                -100, 100, 100
+            ],
+            [
+                100, -100, 100
+            ],
         ];
         lights.map(([x, y, z]) => {
             const spotLight = new THREE.DirectionalLight(0xffffff, 3);
@@ -33,22 +46,37 @@ class Three3D extends ThreeBase {
         this.control.target = new THREE.Vector3(0, 2.5, 0)
         this.control.update()
     }
-    async loadTurbineSkeleton() {
-        const gltf = await this.loadGLTF("turbine.glb")
+    loadModel(processCallback: (percent: number) => void) {
+        const percentAll = [0, 0, 0]
+        return Promise.all([
+            this.loadTurbineSkeleton((skeletonPercent) => {
+                percentAll[0] = skeletonPercent
+                processCallback(eval(percentAll.join("+")))
+            }),
+            this.loadTurbinePlane((planePercent) => {
+                percentAll[1] = planePercent
+                processCallback(eval(percentAll.join("+")))
+            }),
+            this.loadTurbineEquipment((equipmentPercent) => {
+                percentAll[2] = equipmentPercent
+                processCallback(eval(percentAll.join("+")))
+            })
+        ])
+    }
+    async loadTurbineSkeleton(processCallback?: (percent: number) => void) {
+        const gltf = await this.loadGLTF("turbine.glb", processCallback)
         const object = gltf.scene
         object.scale.set(...MODELSCALES)
         object.position.set(...MODELPOSITION);
         const shellModel = object.getObjectByName("颜色材质") as THREE.Object3D;
         const wireFrameModel = object.getObjectByName("线框材质") as THREE.Object3D;
-        //白色外壳消隐效果
+        // 白色外壳消隐效果
         const localPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 3.5);
         shellModel.traverse(mesh => {
-            if (!(mesh instanceof THREE.Mesh)) return void 0
-            mesh.material = new THREE.MeshPhysicalMaterial({
-                color: 0xffffff,
-                metalness: 1,
-                roughness: 0.7,
-            })
+            if (!(mesh instanceof THREE.Mesh))
+                return void 0
+
+            mesh.material = new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 1, roughness: 0.7 })
             mesh.material.clippingPlanes = [localPlane];
         })
         this.renderMixins.push(() => {
@@ -67,25 +95,20 @@ class Three3D extends ThreeBase {
         setInterval(() => {
             const random = Math.floor(Math.random() * 90) - 45 // 正负45
             const oldAngle = trubineGroup.rotation.y;
-            //在oldAngle基础上转动正负45°
+            // 在oldAngle基础上转动正负45°
             const newAngle = (random * (Math.PI / 180)) + oldAngle;
             const updateCallback = (data: animationPropsType) => {
                 trubineGroup.rotation.y = data.angle;
             };
-            this.animation(
-                { angle: oldAngle },
-                { angle: newAngle },
-                2000,
-                updateCallback
-            );
+            this.animation({
+                angle: oldAngle
+            }, {
+                angle: newAngle
+            }, 2000, updateCallback);
         }, 5 * 1000)
+
     }
-    private animation(
-        oldValue: animationPropsType,
-        newValue: animationPropsType,
-        during: number,
-        updateCallback: (arg: animationPropsType) => void
-    ) {
+    private animation(oldValue: animationPropsType, newValue: animationPropsType, during: number, updateCallback: (arg: animationPropsType) => void) {
         const tween = new TWEEN.Tween(oldValue);
         tween.to(newValue, during);
         tween.onUpdate((object: any) => {
@@ -94,8 +117,8 @@ class Three3D extends ThreeBase {
         tween.easing(TWEEN.Easing.Linear.None);
         tween.start();
     }
-    async loadTurbinePlane() {
-        const gltf = await this.loadGLTF("plane.glb")
+    async loadTurbinePlane(processCallback?: (percent: number) => void) {
+        const gltf = await this.loadGLTF("plane.glb", processCallback)
         const texture = gltf.scene.children[0].material.map
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
@@ -104,7 +127,6 @@ class Three3D extends ThreeBase {
             if (count <= 10) {
                 texture.repeat.x += 0.01;
                 texture.repeat.y += 0.02;
-                // texture.offset.x += 10;
             } else {
                 texture.repeat.x = 0
                 texture.repeat.y = 0
@@ -113,14 +135,15 @@ class Three3D extends ThreeBase {
         let mesh = gltf.scene
         mesh.scale.set(...MODELSCALES)
         mesh.position.set(0, 0, 0);
-        if (this.groups.has("turbine")) {
-            this.groups.get("turbine")?.add(mesh)
-        } else {
-            this.createGroup("trubine").add(mesh)
-        }
+        this.scene.add(mesh)
+        // if (this.groups.has("turbine")) {
+        //     this.groups.get("turbine")?.add(mesh)
+        // } else {
+        //     this.createGroup("trubine").add(mesh)
+        // }
     }
-    async loadTurbineEquipment() {
-        const gltf = await this.loadGLTF("equipment.glb");
+    async loadTurbineEquipment(processCallback?: (percent: number) => void) {
+        const gltf = await this.loadGLTF("equipment.glb", processCallback);
         const object = gltf.scene;
         this.equipments = object;
         object.scale.set(...MODELSCALES);
@@ -154,29 +177,27 @@ class Three3D extends ThreeBase {
             "齿轮箱",
         ];
         setInterval(() => {
-            const equipment = this.equipmentMaterialMap.get(
-                equipments[Math.floor(Math.random() * 9)]
-            );
-            if (equipment) {
-                //@ts-ignore
+            const equipment = this.equipmentMaterialMap.get(equipments[Math.floor(Math.random() * 9)]);
+            if (equipment) { // @ts-ignore
                 equipment.material.emissive.setHex(equipment.currentHex);
             }
             equipment.currentHex = equipment.material.emissive.getHex();
             equipment.material.emissive.setHex(0xff0000);
             setTimeout(() => {
-                if (equipment) equipment.material.emissive.setHex(equipment.currentHex);
+                if (equipment)
+                    equipment.material.emissive.setHex(equipment.currentHex);
+
             }, 4000);
         }, 5000);
     }
     private equipmentClick(event: MouseEvent) {
-        const mouse = new THREE.Vector2(
-            (event.clientX / this.element.offsetWidth) * 2 - 1,
-            -(event.clientY / this.element.offsetHeight) * 2 + 1
-        );
+        const mouse = new THREE.Vector2((event.clientX / this.element.offsetWidth) * 2 - 1, -(event.clientY / this.element.offsetHeight) * 2 + 1);
         const raycaster = new THREE.Raycaster();
         raycaster.setFromCamera(mouse, this.camera);
         const intersects = raycaster.intersectObject(this.equipments, true);
-        if (intersects.length <= 0) return false;
+        if (intersects.length <= 0)
+            return false;
+
         const selectedObject = intersects[0].object;
         if (selectedObject.type === "Mesh") {
             this.outline([selectedObject]);
@@ -186,12 +207,7 @@ class Three3D extends ThreeBase {
         const { renderer, camera, scene } = this;
         const composer = new EffectComposer(renderer);
         var renderPass = new RenderPass(scene, camera);
-        var outlinePass = new OutlinePass(
-            new THREE.Vector2(this.element.offsetWidth, this.element.offsetWidth),
-            scene,
-            camera,
-            selectedObjects
-        );
+        var outlinePass = new OutlinePass(new THREE.Vector2(this.element.offsetWidth, this.element.offsetWidth), scene, camera, selectedObjects);
         outlinePass.renderToScreen = true;
         outlinePass.selectedObjects = selectedObjects;
         composer.addPass(renderPass);
@@ -201,7 +217,7 @@ class Three3D extends ThreeBase {
             edgeGlow: 0,
             edgeThickness: 50.0,
             pulsePeriod: 1,
-            usePatternTexture: false,
+            usePatternTexture: false
         };
         outlinePass.edgeStrength = params.edgeStrength;
         outlinePass.edgeGlow = params.edgeGlow;
