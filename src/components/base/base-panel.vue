@@ -1,13 +1,13 @@
 <template>
     <div class="base-panel">
-        <BPanleTitle :options="titleOptions"></BPanleTitle>
+        <PanleTitle :options="titleOptions"></PanleTitle>
         <div class="base-panel-content">
             <slot></slot>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import BPanleTitle from "components/Base/BPanelTitle.vue"
+import PanleTitle from "components/Base/base-panelTitle.vue"
 import { panelTitleType } from "./types";
 interface propsType {
     titleOptions: panelTitleType
@@ -18,6 +18,7 @@ const props = defineProps<propsType>()
 .base-panel {
     width: 100%;
     height: 100%;
+
     .base-panel-content {
         width: 100%;
         height: calc(100% - 50px);
