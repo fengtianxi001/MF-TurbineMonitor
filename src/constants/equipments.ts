@@ -14,7 +14,9 @@ const sourceMap = {
   },
 } as const;
 
-export const TEMPERATURES_KEY_MAP =
+export type EQUIPMENT_KEY_TYPE = "cabin" | "ev" | "gearCase"
+
+export const EQUIPMENTS_KEY_MAP =
   constantToKeyMap<typeof sourceMap>(sourceMap);
-export const TEMPERATURES_STATUS_MAP =
+export const EQUIPMENTS_STATUS_MAP =
   constantToMap<typeof sourceMap>(sourceMap);
