@@ -12,7 +12,7 @@ import { createDynamicBarOptions } from "utils/createDynamicBarOptions";
 import { ref } from "vue";
 import { useChart } from "hooks/useChart";
 import { useSocket } from "hooks/useSocket";
-import { TEMPERATURES_STATUS_MAP } from "@/constants/temperatures";
+import { EQUIPMENTS_STATUS_MAP, EQUIPMENT_KEY_TYPE } from "@/constants/equipments";
 
 const title: panelTitleType = {
     cn: "环境监测",
@@ -27,13 +27,13 @@ useSocket({
     formatter(response) {
         return Object.keys(response.data).map((key) => (
             {
-                label: TEMPERATURES_STATUS_MAP[key]["label"],
+                label: EQUIPMENTS_STATUS_MAP[key]["label"],
                 value: response.data[key]
             }
         ))
     },
     onUpdate(formatterResult) {
-        refresh(createActiveBarConfig(formatterResult))
+        refresh(createDynamicBarOptions(formatterResult))
     }
 })
 </script>
