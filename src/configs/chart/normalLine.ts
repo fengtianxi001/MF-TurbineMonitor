@@ -13,7 +13,7 @@ export const defaultData: lineConfigType = {
   6: [10, 30],
   7: [80, 10],
 }
-export function createNormalLineConfig(config: lineConfigType): echarts.EChartsOption {
+export function createNormalLineConfig(config: lineConfigType = defaultData): echarts.EChartsOption {
   const label = Object.keys(config);
   const data1: Array<number> = [];
   const data2: Array<number> = [];

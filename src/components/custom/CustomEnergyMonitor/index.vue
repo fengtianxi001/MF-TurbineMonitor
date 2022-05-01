@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import BPanel from "components/Base/BPanel.vue"
 import { panelTitleType } from "components/Base/types";
-import { createNormalBarConfig, defaultData } from "configs/chart/normalBar";
+import { createNormalBarConfig } from "configs/chart/normalBar";
 import { reactive, ref } from "vue";
 import { useChart } from "hooks/useChart";
 import { useSocket } from "@/hooks/useSocket";
@@ -18,7 +18,7 @@ const title: panelTitleType = {
 }
 
 const container = ref<null | HTMLElement>(null)
-const { refresh } = useChart(container, createNormalBarConfig(defaultData))
+const { refresh } = useChart(container, createNormalBarConfig())
 useSocket({
     params: {
         type: "monthlyPower",

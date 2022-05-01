@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import BPanel from "components/Base/BPanel.vue"
 import { panelTitleType } from "components/Base/types";
-import { createActiveBarConfig, defaultData } from "configs/chart/activeBar";
+import { createActiveBarConfig } from "configs/chart/activeBar";
 import { ref } from "vue";
 import { useChart } from "hooks/useChart";
 import { useSocket } from "@/hooks/useSocket";
@@ -19,7 +19,7 @@ const title: panelTitleType = {
     sequence: 1
 }
 const container = ref<null | HTMLElement>(null)
-const { refresh } = useChart(container, createActiveBarConfig(defaultData))
+const { refresh } = useChart(container, createActiveBarConfig())
 useSocket({
     params: {
         type: "temperatures",

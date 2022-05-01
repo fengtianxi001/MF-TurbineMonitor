@@ -17,7 +17,7 @@ export const defaultData = [
     value: 70
   }
 ]
-export function createActiveBarConfig(config: barConfigType = []): echarts.EChartsOption {
+export function createActiveBarConfig(config: barConfigType = defaultData): echarts.EChartsOption {
   const label = config.map(({ label }) => label);
   const data = config.map(({ value }) => value);
   return {
