@@ -80,6 +80,7 @@ class Base {
     }
     initStats() {
         if (this.options?.needStats) {
+            //@ts-ignore
             const stats = new Stats();
             this.element.appendChild(stats.dom);
             return stats

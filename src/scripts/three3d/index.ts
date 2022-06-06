@@ -119,6 +119,7 @@ class Three3D extends ThreeBase {
     }
     async loadTurbinePlane(processCallback?: (percent: number) => void) {
         const gltf = await this.loadGLTF("plane.glb", processCallback)
+        //@ts-ignore
         const texture = gltf.scene.children[0].material.map
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
@@ -177,12 +178,12 @@ class Three3D extends ThreeBase {
             "齿轮箱",
         ];
         setInterval(() => {
-            const equipment = this.equipmentMaterialMap.get(equipments[Math.floor(Math.random() * 9)]);
-            if (equipment) { // @ts-ignore
+            const equipment:any = this.equipmentMaterialMap.get(equipments[Math.floor(Math.random() * 9)])
+            if (equipment) { 
                 equipment.material.emissive.setHex(equipment.currentHex);
             }
             equipment.currentHex = equipment.material.emissive.getHex();
-            equipment.material.emissive.setHex(0xff0000);
+            equipment!.material!.emissive.setHex(0xff0000);
             setTimeout(() => {
                 if (equipment)
                     equipment.material.emissive.setHex(equipment.currentHex);
