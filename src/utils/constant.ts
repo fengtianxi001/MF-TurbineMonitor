@@ -5,6 +5,7 @@ export function constantToMap<
   const obj = Object.keys(sourceMap).reduce((result, name) => {
     const newKey = sourceMap[name][key];
     const newValue = sourceMap[name] as string
+    //@ts-ignore
     result[newKey] = newValue;
     return result;
   }, {} as { [P in T[keyof T][K]]: T[keyof T] });

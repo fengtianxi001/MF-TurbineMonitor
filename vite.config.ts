@@ -7,10 +7,13 @@ export default defineConfig(({ mode }) => {
   // console.log(env)
   return {
     plugins: [vue()],
+    base: "./",
+    build: {
+      outDir: "./docs",
+    },
     server: {
       hmr: true,
-      host: env.VITE_HOST,
-      port: Number(env.VITE_PORT),
+      host: "0.0.0.0"
     },
     resolve: {
       alias: {

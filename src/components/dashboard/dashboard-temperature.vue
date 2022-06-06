@@ -25,6 +25,7 @@ useSocket({
   },
   formatter(response) {
     return Object.keys(response.data).map((key) => ({
+      //@ts-ignore
       label: EQUIPMENTS_STATUS_MAP[key]["label"],
       value: response.data[key],
     }));
