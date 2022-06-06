@@ -34,7 +34,8 @@ npm run dev
 
 
 ## 在线预览(版本可能落后)
-[http://112.124.22.244/turbine-large-screen/index.html](http://112.124.22.244/turbine-large-screen/index.html)
+[https://fengtianxi001.github.io/THREE-TurbineMonitor/](https://fengtianxi001.github.io/THREE-TurbineMonitor/)
+
 
 ### 效果图(版本可能落后)
 
