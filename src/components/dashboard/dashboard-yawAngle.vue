@@ -1,13 +1,13 @@
 <template>
   <div class="custom-active-monitor">
-    <Panel :titleOptions="title">
-      <MessageList :data="data"></MessageList>
-    </Panel>
+    <base-panel :title="title">
+      <base-message-list :data="data" />
+    </base-panel>
   </div>
 </template>
 <script setup lang="ts">
-import Panel from "components/base/base-panel.vue";
-import MessageList from "components/base/base-messageList.vue";
+import BasePanel from "@/components/BasePanel.vue";
+import BaseMessageList from "@/components/BaseMessageList.vue";
 import { panelTitleType, messageListType } from "components/Base/types";
 const title: panelTitleType = {
   cn: "偏航角度监测",
