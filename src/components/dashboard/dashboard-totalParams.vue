@@ -1,16 +1,16 @@
 <template>
   <div class="custom-total-monitor">
-    <Panel :titleOptions="title">
+    <base-panel :title="title">
       <div class="total-panel">
-        <MessageList :data="messageDate"></MessageList>
+        <message-list :data="messageDate" />
         <div class="chart" ref="container"></div>
       </div>
-    </Panel>
+    </base-panel>
   </div>
 </template>
 <script setup lang="ts">
-import Panel from "components/base/base-panel.vue";
-import MessageList from "components/base/base-messageList.vue";
+import BasePanel from "@/components/BasePanel.vue";
+import MessageList from "@/components/BaseMessageList.vue";
 import { panelTitleType } from "components/Base/types";
 import { ref } from "vue";
 import { useChart } from "hooks/useChart";
