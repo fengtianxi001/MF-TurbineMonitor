@@ -3,7 +3,7 @@ import TWEEN from "@tweenjs/tween.js";
 import { useThree } from "@/hooks/useThree";
 import { computed, onMounted, reactive, Ref, ref } from "vue";
 import { forEach, isFunction, sample, size } from "lodash-es";
-import { MODEL_POSITION, MODEL_SCALES } from "@/configs/THREE";
+import { MODEL_POSITION, MODEL_SCALES } from "@/configs/three";
 // @ts-ignore
 import { RenderPass, EffectComposer, OutlinePass } from "three-outlinepass";
 export function useTurbine(element: Ref<HTMLElement>) {

@@ -1,27 +1,26 @@
 import * as echarts from "echarts";
 
-type configType = Array<{
+// const defaultData = [
+//   {
+//     label: "环境温度",
+//     value: 50,
+//   },
+//   {
+//     label: "机舱温度",
+//     value: 60,
+//   },
+//   {
+//     label: "齿轮箱温度",
+//     value: 70,
+//   },
+// ];
+
+type ConfigType = Array<{
   label: string;
-  value: number;
+  value: number | string;
 }>;
 
-const defaultData = [
-  {
-    label: "环境温度",
-    value: 50,
-  },
-  {
-    label: "机舱温度",
-    value: 60,
-  },
-  {
-    label: "齿轮箱温度",
-    value: 70,
-  },
-];
-export function createDynamicBarOptions(
-  config: configType = defaultData
-): echarts.EChartsOption {
+export function horizontalBar(config: ConfigType):echarts.EChartsCoreOption {
   const label = config.map(({ label }) => label);
   const data = config.map(({ value }) => value);
   return {

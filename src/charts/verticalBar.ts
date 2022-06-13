@@ -1,17 +1,15 @@
-import * as echarts from "echarts";
+// import * as echarts from "echarts";
 
-type barConfigType = Array<{
+type ConfigType = Array<{
   label: string;
   value: number;
 }>;
-const defaultData = new Array(12).fill(0).map((item, index) => ({
-  label: `#${index + 1}`,
-  value: Math.round(Math.random() * 100),
-}));
+// const defaultData = new Array(12).fill(0).map((item, index) => ({
+//   label: `#${index + 1}`,
+//   value: Math.round(Math.random() * 100),
+// }));
 
-export function createNormalBarOptions(
-  config: barConfigType = defaultData
-): echarts.EChartsOption {
+export function verticalBar(config: ConfigType) {
   const label = config.map(({ label }) => label);
   const data = config.map(({ value }) => value);
   return {

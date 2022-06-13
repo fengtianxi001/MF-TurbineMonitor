@@ -8,31 +8,29 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { PanelTitleType } from "@/types/index";
-import { createDynamicBarOptions } from "utils/createDynamicBarOptions";
-import { useChart, useSocket } from "@/hooks/index";
-import { EQUIPMENTS_STATUS_MAP } from "@/constants/equipments";
+import { horizontalBar } from "@/charts/horizontalBar";
+import { useChart } from "@/hooks/index";
 import BasePanel from "@/components/BasePanel.vue";
 const title: PanelTitleType = {
   cn: "环境监测",
   sequence: 1,
 };
-const container = ref<null | HTMLElement>(null);
-const { refresh } = useChart(container, createDynamicBarOptions());
-useSocket({
-  params: {
-    type: "temperatures",
+const container = ref<HTMLElement | undefined>();
+const { option } = useChart(container);
+option.value = horizontalBar([
+  {
+    label: "环境温度",
+    value: 50,
   },
-  formatter(response) {
-    return Object.keys(response.data).map((key) => ({
-      //@ts-ignore
-      label: EQUIPMENTS_STATUS_MAP[key]["label"],
-      value: response.data[key],
-    }));
+  {
+    label: "机舱温度",
+    value: 60,
   },
-  onUpdate(formatterResult) {
-    refresh(createDynamicBarOptions(formatterResult));
+  {
+    label: "齿轮箱温度",
+    value: 70,
   },
-});
+]);
 </script>
 <style lang="scss" scoped>
 .custom-en-monitor {
