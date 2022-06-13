@@ -2,26 +2,26 @@
   <div class="left">
     <base-logo />
     <dashboard-temperature />
-    <DashboardEnergy />
-    <DashboardTotalParams />
+    <dashboard-energy />
+    <dashboard-total-params />
   </div>
   <div class="right">
-    <DashboardYawAngle />
-    <DashboardActive />
-    <DashboardError />
+    <dashboard-yaw-angle />
+    <dashboard-active />
+    <dashboard-error />
   </div>
-  <Dashboard3D></Dashboard3D>
+  <dashboard-turbine />
 </template>
 <script lang="ts" setup>
 import BaseLogo from "@/components/BaseLogo.vue";
 import DashboardTemperature from "@/components/DashboardTemperature.vue";
-import DashboardEnergy from "components/dashboard/dashboard-energy.vue";
-import DashboardTotalParams from "components/dashboard/dashboard-totalParams.vue";
+import DashboardEnergy from "@/components/DashboardEnergy.vue";
+import DashboardTotalParams from "@/components/DashboardTotalParams.vue";
 
-import DashboardYawAngle from "components/dashboard/dashboard-yawAngle.vue";
-import DashboardActive from "components/dashboard/dashboard-active.vue";
-import DashboardError from "components/dashboard/dashboard-error.vue";
-import Dashboard3D from "components/dashboard/dashboard-3d.vue";
+import DashboardYawAngle from "@/components/DashboardYawAngle.vue";
+import DashboardActive from "@/components/DashboardActive.vue";
+import DashboardError from "@/components/DashboardError.vue";
+import DashboardTurbine from "@/components/DashboardTurbine.vue";
 </script>
 <style lang="scss" scoped>
 %side {
@@ -39,6 +39,7 @@ import Dashboard3D from "components/dashboard/dashboard-3d.vue";
   @extend %side;
   left: 0;
   grid-template-rows: 80px 1fr 1.5fr 1.5fr;
+  z-index: 9999;
 }
 
 .right {
@@ -47,7 +48,7 @@ import Dashboard3D from "components/dashboard/dashboard-3d.vue";
   grid-gap: 40px;
   grid-template-rows: 1fr 1fr 1.5fr;
   justify-items: end;
-
+  z-index: 9999;
   & > div {
     flex-shrink: 0;
     overflow: hidden;

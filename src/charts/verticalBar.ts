@@ -1,15 +1,8 @@
-// import * as echarts from "echarts";
-
 type ConfigType = Array<{
   label: string;
   value: number;
 }>;
-// const defaultData = new Array(12).fill(0).map((item, index) => ({
-//   label: `#${index + 1}`,
-//   value: Math.round(Math.random() * 100),
-// }));
-
-export function verticalBar(config: ConfigType) {
+export function verticalBar(config: ConfigType): echarts.EChartsCoreOption {
   const label = config.map(({ label }) => label);
   const data = config.map(({ value }) => value);
   return {
@@ -64,3 +57,8 @@ export function verticalBar(config: ConfigType) {
     animationEasingUpdate: "linear",
   };
 }
+
+export const defaultChartValue = new Array(12).fill(0).map((item, index) => ({
+  label: `#${index + 1}`,
+  value: Math.round(Math.random() * 100),
+}));

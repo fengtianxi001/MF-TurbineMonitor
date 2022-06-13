@@ -50,10 +50,5 @@ const data: Array<MessageListType> = [
 .the-active-monitor {
   width: 100%;
   height: 100%;
-
-  // .chart {
-  //   width: 100%;
-  //   height: 90px;
-  // }
 }
 </style>

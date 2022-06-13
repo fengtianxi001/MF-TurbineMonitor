@@ -6,16 +6,15 @@
   </div>
 </template>
 <script setup lang="ts">
+import { PanelTitleType, MessageListType } from "@/types/index";
 import BasePanel from "@/components/BasePanel.vue";
 import BaseMessageList from "@/components/BaseMessageList.vue";
-import { panelTitleType } from "components/Base/types";
-import { reactive } from "vue";
-import { messageListType } from "components/Base/types";
-const title: panelTitleType = {
+
+const title: PanelTitleType = {
   cn: "异常监测",
   sequence: 6,
 };
-const data: Array<messageListType> = [
+const data: Array<MessageListType> = [
   {
     label: "发动机运行",
     value: "状态可疑",
@@ -39,6 +38,7 @@ const data: Array<messageListType> = [
   {
     label: "叶片运行",
     value: "状态可疑",
+    type: "danger",
   },
   {
     label: "偏航角度",
@@ -56,10 +56,6 @@ const data: Array<messageListType> = [
     type: "danger",
   },
 ];
-
-const state = reactive({
-  title: { cn: "运行数据监测" },
-});
 </script>
 <style lang="scss" scoped>
 .custom-active-monitor {

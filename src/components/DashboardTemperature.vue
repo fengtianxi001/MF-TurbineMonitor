@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { PanelTitleType } from "@/types/index";
-import { horizontalBar } from "@/charts/horizontalBar";
+import { horizontalBar,defaultChartValue } from "@/charts/horizontalBar";
 import { useChart } from "@/hooks/index";
 import BasePanel from "@/components/BasePanel.vue";
 const title: PanelTitleType = {
@@ -17,20 +17,7 @@ const title: PanelTitleType = {
 };
 const container = ref<HTMLElement | undefined>();
 const { option } = useChart(container);
-option.value = horizontalBar([
-  {
-    label: "环境温度",
-    value: 50,
-  },
-  {
-    label: "机舱温度",
-    value: 60,
-  },
-  {
-    label: "齿轮箱温度",
-    value: 70,
-  },
-]);
+option.value = horizontalBar(defaultChartValue);
 </script>
 <style lang="scss" scoped>
 .custom-en-monitor {
