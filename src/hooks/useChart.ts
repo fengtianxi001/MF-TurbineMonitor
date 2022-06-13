@@ -1,36 +1,35 @@
 import * as echarts from "echarts";
-import { onMounted, ref, Ref, onBeforeUnmount } from "vue";
+import { onMounted, ref, Ref, onBeforeUnmount, watch } from "vue";
 
-export function useChart(
-  dom: Ref<HTMLElement | null>,
-  option: echarts.EChartsOption
-) {
-  const chart = ref<echarts.ECharts | null>(null);
+export function useChart(element: Ref<HTMLElement | undefined>) {
+  const chart = ref<echarts.ECharts | undefined>();
+  const option = ref<echarts.EChartsCoreOption | undefined>();
   const dispose = chart.value?.dispose();
   const refresh = (option: echarts.EChartsOption) => {
     chart.value?.setOption(option);
   };
-  let onResize: {
-    (): void;
-    (this: Window, ev: UIEvent): any;
-    (this: Window, ev: UIEvent): any;
-  };
+  watch(option, () => {
+    if (!option.value) return false;
+    if (chart.value) {
+      chart.value.setOption(option.value);
+    } else {
+      setTimeout(() => {
+        chart.value?.setOption(option.value as echarts.EChartsOption);
+      }, 1000 * 0.5);
+    }
+  });
   onMounted(() => {
-    chart.value = echarts.init(dom.value as HTMLElement);
-    chart.value.setOption(option);
-    // onResize = () => {
-    //   chart.value?.resize();
-    // };
-    // window.addEventListener("resize", onResize)
+    chart.value = echarts.init(element.value as HTMLElement);
+    // if(option.value){}
   });
   onBeforeUnmount(() => {
-    // window.removeEventListener("resize", onResize)
     chart.value?.dispose();
   });
 
   return {
     chart,
     dispose,
+    option,
     refresh,
   };
 }
