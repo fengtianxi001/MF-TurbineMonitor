@@ -8,26 +8,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { PanelTitleType } from "@/types/index";
-import { useChart, useSocket } from "@/hooks/index";
-import { createNormalBarOptions } from "utils/createNormalBarOptions";
+import { useChart } from "@/hooks/index";
+import { verticalBar, defaultChartValue } from "@/charts/verticalBar";
 import BasePanel from "@/components/BasePanel.vue";
 const title: PanelTitleType = {
   cn: "发电监测",
   sequence: 2,
 };
-const container = ref<null | HTMLElement>(null);
-const { refresh } = useChart(container, createNormalBarOptions());
-useSocket({
-  params: {
-    type: "monthlyPower",
-  },
-  formatter(response) {
-    return response.data;
-  },
-  onUpdate(formatterResult) {
-    refresh(createNormalBarOptions(formatterResult));
-  },
-});
+const container = ref<HTMLElement | undefined>();
+const { option } = useChart(container);
+option.value = verticalBar(defaultChartValue);
 </script>
 <style lang="scss" scoped>
 .custom-en-monitor {

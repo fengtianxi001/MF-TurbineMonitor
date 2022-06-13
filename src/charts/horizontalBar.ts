@@ -1,26 +1,8 @@
-import * as echarts from "echarts";
-
-// const defaultData = [
-//   {
-//     label: "环境温度",
-//     value: 50,
-//   },
-//   {
-//     label: "机舱温度",
-//     value: 60,
-//   },
-//   {
-//     label: "齿轮箱温度",
-//     value: 70,
-//   },
-// ];
-
 type ConfigType = Array<{
   label: string;
   value: number | string;
 }>;
-
-export function horizontalBar(config: ConfigType):echarts.EChartsCoreOption {
+export function horizontalBar(config: ConfigType): echarts.EChartsCoreOption {
   const label = config.map(({ label }) => label);
   const data = config.map(({ value }) => value);
   return {
@@ -76,3 +58,18 @@ export function horizontalBar(config: ConfigType):echarts.EChartsCoreOption {
     animationEasingUpdate: "linear",
   };
 }
+
+export const defaultChartValue = [
+  {
+    label: "环境温度",
+    value: 50,
+  },
+  {
+    label: "机舱温度",
+    value: 60,
+  },
+  {
+    label: "齿轮箱温度",
+    value: 70,
+  },
+];
