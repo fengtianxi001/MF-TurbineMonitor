@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "serve": "node server/app.js",
     "build": "vue-tsc --noEmit && vite build"
   },
   "dependencies": {
@@ -16,7 +15,6 @@
     "three": "^0.139.2",
     "three-outlinepass": "^1.2.0",
     "vue": "^3.2.25",
-    "ws": "^8.5.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",

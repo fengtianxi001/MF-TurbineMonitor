@@ -76,7 +76,7 @@ export function useThree(element: Ref<HTMLElement>) {
   };
   const initStats = () => {
     //@ts-ignore
-    stats = new Stats();
+    const stats = new Stats();
     element.value.appendChild(stats.dom);
   };
   const createGroup = (): THREE.Group => {
