@@ -10,7 +10,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import { useChart } from "hooks/useChart";
+import { useChart } from "@/hooks/useChart";
 import { PanelTitleType } from "@/types/index";
 import { brokenLine, defaultChartValue } from "@/charts/brokenLine";
 import { MessageListType } from "@/types/index";
