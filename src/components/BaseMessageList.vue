@@ -5,24 +5,23 @@
       class="base-message-list__item"
       :key="index"
       :class="className(type)"
-      :style="itemStyle"
-    >
+      :style="itemStyle">
       <span>{{ label }}</span>
       <span>{{ value }}</span>
     </li>
   </ul>
 </template>
 <script setup lang="ts">
-import { computed, StyleValue, Ref } from "vue";
-import { MessageListType } from "@/types/MessageList";
+import { computed, StyleValue, Ref } from 'vue'
+import { MessageListType } from '#/MessageList'
 interface PropsType {
-  data: Array<MessageListType>;
+  data: Array<MessageListType>
 }
-const props = defineProps<PropsType>();
+const props = defineProps<PropsType>()
 const itemStyle: Ref<StyleValue> = computed(() => ({
-  height: 100 / props.data.length + "%",
-}));
-const className = (type: string) => ({ danger: type === "danger" });
+  height: 100 / props.data.length + '%',
+}))
+const className = (type: string) => ({ danger: type === 'danger' })
 </script>
 
 <style lang="scss" scoped>
@@ -45,7 +44,7 @@ const className = (type: string) => ({ danger: type === "danger" });
       color: #fff;
       animation: twinkling 3s ease-in-out infinite;
       &::before {
-        content: "";
+        content: '';
         width: 8px;
         height: 8px;
         background-color: red;
