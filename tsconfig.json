@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -9,20 +8,24 @@
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "components/*": ["src/components/*"],
-      "utils/*": ["src/utils/*"],
-      "styles/*": ["src/styles/*"],
-      "hooks/*": ["src/hooks/*"],
-      "configs/*": ["src/configs/*"],
-
-    }
+      "@/*": ["./src/*"],
+      "#/*": ["./types/*"]
+    },
+    "types": ["echarts", "lodash-es"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts",
+    "vite/**/*.ts",
+    "mock/**/*.ts",
+    "types/**/*.d.ts",
+    "types/**/*.ts"
+  ]
 }
