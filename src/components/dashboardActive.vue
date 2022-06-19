@@ -1,13 +1,11 @@
 <template>
   <div class="the-active-monitor">
-    <base-panel :title="title">
-      <base-message-list :data="data" />
-    </base-panel>
+    <BasePanel :title="title">
+      <BaseMessageList :data="data" />
+    </BasePanel>
   </div>
 </template>
 <script setup lang="ts">
-import BasePanel from '@/components/BasePanel.vue'
-import BaseMessageList from '@/components/BaseMessageList.vue'
 import { MessageListType } from '#/MessageList'
 import { PanelTitleType } from '#/Panel'
 const title: PanelTitleType = {

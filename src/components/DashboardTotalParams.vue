@@ -1,11 +1,11 @@
 <template>
   <div class="custom-total-monitor">
-    <base-panel :title="title">
+    <BasePanel :title="title">
       <div class="total-panel">
-        <message-list :data="messageDate" />
+        <BaseMessageList :data="messageDate" />
         <div class="chart" ref="container"></div>
       </div>
-    </base-panel>
+    </BasePanel>
   </div>
 </template>
 <script setup lang="ts">
@@ -14,11 +14,9 @@ import { useChart } from '@/hooks/useChart'
 import { PanelTitleType } from '#/Panel'
 import { brokenLine, defaultChartValue } from '@/charts/brokenLine'
 import { MessageListType } from '#/MessageList'
-import BasePanel from '@/components/BasePanel.vue'
-import MessageList from '@/components/BaseMessageList.vue'
 const title: PanelTitleType = {
   cn: '参数统计',
-  sequence: 1,
+  sequence: 3,
 }
 const messageDate: Array<MessageListType> = [
   {

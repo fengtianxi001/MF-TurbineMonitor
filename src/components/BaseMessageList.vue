@@ -17,9 +17,9 @@ import { MessageListType } from '#/MessageList'
 interface PropsType {
   data: Array<MessageListType>
 }
-const props = defineProps<PropsType>()
+const { data = [] } = defineProps<PropsType>()
 const itemStyle: Ref<StyleValue> = computed(() => ({
-  height: 100 / props.data.length + '%',
+  height: 100 / data.length + '%',
 }))
 const className = (type: string) => ({ danger: type === 'danger' })
 </script>

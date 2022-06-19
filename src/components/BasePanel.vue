@@ -13,17 +13,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-import { createSequence, createEnTitleByCn } from "@/utils/index";
-import { PanelTitleType } from "@/types/Panel";
+import { computed } from 'vue'
+import { createSequence, createEnTitleByCn } from '@/utils/index'
+import { PanelTitleType } from '#/Panel'
 interface propsType {
-  title: PanelTitleType;
+  title: PanelTitleType
 }
-const props = defineProps<propsType>();
-const sequence = computed(() =>
-  createSequence(Number(props.title?.sequence) || 1)
-);
-const en = computed(() => createEnTitleByCn(props.title.cn));
+const { title } = defineProps<propsType>()
+const sequence = computed(() => createSequence(Number(title?.sequence) || 1))
+const en = computed(() => createEnTitleByCn(title.cn))
 </script>
 <style lang="scss" scoped>
 .base-panel {

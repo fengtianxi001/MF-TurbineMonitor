@@ -1,6 +1,6 @@
 import App from './App.vue'
 import '@/styles/global.scss'
-import { setupPlugins } from './plugins'
+// import { setupPlugins } from './plugins'
 import { App as AppType, createApp } from 'vue'
 
 class Main {
@@ -10,7 +10,7 @@ class Main {
   }
   private app(): AppType {
     const app = createApp(App)
-    setupPlugins(app)
+    // setupPlugins(app)
     return app
   }
 }

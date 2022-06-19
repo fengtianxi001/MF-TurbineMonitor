@@ -8,7 +8,7 @@ export const plugins: Array<Plugin> = [
   }),
   AutoImport({
     resolvers: [],
-    imports: ['vue', 'vue-router'],
+    imports: ['vue'],
     dts: 'types/auto-imports.d.ts',
   }),
   Components({

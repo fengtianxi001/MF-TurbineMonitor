@@ -35,8 +35,8 @@ export function useTurbine(element: Ref<HTMLElement>) {
 
   onMounted(() => {
     scene.value?.add(turbineGroup);
-    camera.value?.position.set(-2, 4, 4);
-    control.value?.target.set(0, 2.5, 0);
+    camera.value?.position.set(-1, 3.5, 2);
+    control.value?.target.set(0, 2.6, 0);
     control.value?.update();
     _initLight(scene.value!);
     _loadTurbineEquipments();
@@ -76,7 +76,7 @@ export function useTurbine(element: Ref<HTMLElement>) {
       mesh.material.clippingPlanes = [clippingPlane];
       renderMixins.push(() => {
         if (clippingPlane.constant <= -1) return void 0;
-        clippingPlane.constant -= 0.01;
+        clippingPlane.constant -= 0.001;
       });
       turbineGroup.add(object);
       loadAnimate(object, animations, "Anim_0");

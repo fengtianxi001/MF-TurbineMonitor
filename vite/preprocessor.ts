@@ -4,7 +4,6 @@ export const preprocessorOptions: Record<string, any> = {
         @use "@/styles/var.scss" as *;
         @use "@/styles/mixins.scss" as *;
         @use "@/styles/base.scss" as *;
-        @use "@/styles/theme.scss" as *;
       `,
   },
 }
