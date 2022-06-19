@@ -1,17 +1,13 @@
 <template>
   <div class="custom-active-monitor">
-    <base-panel :title="title">
-      <base-message-list :data="data" />
-    </base-panel>
+    <BasePanel :title="title">
+      <BaseMessageList :data="data" />
+    </BasePanel>
   </div>
 </template>
 <script setup lang="ts">
 import { PanelTitleType } from '#/Panel'
 import { MessageListType } from '#/MessageList'
-
-import BasePanel from '@/components/BasePanel.vue'
-import BaseMessageList from '@/components/BaseMessageList.vue'
-
 const title: PanelTitleType = {
   cn: '异常监测',
   sequence: 6,
@@ -63,7 +59,6 @@ const data: Array<MessageListType> = [
 .custom-active-monitor {
   width: 100%;
   height: 100%;
-
   .chart {
     width: 100%;
     height: 90px;
