@@ -6,56 +6,58 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PanelTitleType, MessageListType } from "@/types/index";
-import BasePanel from "@/components/BasePanel.vue";
-import BaseMessageList from "@/components/BaseMessageList.vue";
+import { PanelTitleType } from '#/Panel'
+import { MessageListType } from '#/MessageList'
+
+import BasePanel from '@/components/BasePanel.vue'
+import BaseMessageList from '@/components/BaseMessageList.vue'
 
 const title: PanelTitleType = {
-  cn: "异常监测",
+  cn: '异常监测',
   sequence: 6,
-};
+}
 const data: Array<MessageListType> = [
   {
-    label: "发动机运行",
-    value: "状态可疑",
-    type: "primary",
+    label: '发动机运行',
+    value: '状态可疑',
+    type: 'primary',
   },
   {
-    label: "齿轮箱运行",
-    value: "状态可疑",
-    type: "warning",
+    label: '齿轮箱运行',
+    value: '状态可疑',
+    type: 'warning',
   },
   {
-    label: "变桨系统运行",
-    value: "异常",
-    type: "danger",
+    label: '变桨系统运行',
+    value: '异常',
+    type: 'danger',
   },
   {
-    label: "主轴运行",
-    value: "异常",
-    type: "danger",
+    label: '主轴运行',
+    value: '异常',
+    type: 'danger',
   },
   {
-    label: "叶片运行",
-    value: "状态可疑",
-    type: "danger",
+    label: '叶片运行',
+    value: '状态可疑',
+    type: 'danger',
   },
   {
-    label: "偏航角度",
-    value: "异常",
-    type: "danger",
+    label: '偏航角度',
+    value: '异常',
+    type: 'danger',
   },
   {
-    label: "发电机",
-    value: "正常",
-    type: "danger",
+    label: '发电机',
+    value: '正常',
+    type: 'danger',
   },
   {
-    label: "发电机",
-    value: "正常",
-    type: "danger",
+    label: '发电机',
+    value: '正常',
+    type: 'danger',
   },
-];
+]
 </script>
 <style lang="scss" scoped>
 .custom-active-monitor {

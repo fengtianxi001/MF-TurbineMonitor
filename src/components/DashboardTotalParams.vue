@@ -9,57 +9,57 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
-import { useChart } from "@/hooks/useChart";
-import { PanelTitleType } from "@/types/index";
-import { brokenLine, defaultChartValue } from "@/charts/brokenLine";
-import { MessageListType } from "@/types/index";
-import BasePanel from "@/components/BasePanel.vue";
-import MessageList from "@/components/BaseMessageList.vue";
+import { ref } from 'vue'
+import { useChart } from '@/hooks/useChart'
+import { PanelTitleType } from '#/Panel'
+import { brokenLine, defaultChartValue } from '@/charts/brokenLine'
+import { MessageListType } from '#/MessageList'
+import BasePanel from '@/components/BasePanel.vue'
+import MessageList from '@/components/BaseMessageList.vue'
 const title: PanelTitleType = {
-  cn: "参数统计",
+  cn: '参数统计',
   sequence: 1,
-};
+}
 const messageDate: Array<MessageListType> = [
   {
-    label: "年发电量",
+    label: '年发电量',
     value: `1000MWh`,
-    type: "primary",
+    type: 'primary',
   },
   {
-    label: "月发电量",
+    label: '月发电量',
     value: `100MWh`,
-    type: "primary",
+    type: 'primary',
   },
   {
-    label: "日发电量",
+    label: '日发电量',
     value: `10MWh`,
-    type: "primary",
+    type: 'primary',
   },
   {
-    label: "负荷率",
+    label: '负荷率',
     value: `100%`,
-    type: "primary",
+    type: 'primary',
   },
   {
-    label: "平均风速:",
+    label: '平均风速:',
     value: `100km/s`,
-    type: "primary",
+    type: 'primary',
   },
   {
-    label: "最大风速",
+    label: '最大风速',
     value: `200km/s`,
-    type: "primary",
+    type: 'primary',
   },
   {
-    label: "总功率",
+    label: '总功率',
     value: `10000KVa`,
-    type: "primary",
+    type: 'primary',
   },
-];
-const container = ref<HTMLElement | undefined>();
-const { option } = useChart(container);
-option.value = brokenLine(defaultChartValue);
+]
+const container = ref<HTMLElement | undefined>()
+const { option } = useChart(container)
+option.value = brokenLine(defaultChartValue)
 </script>
 <style lang="scss" scoped>
 .custom-total-monitor {
