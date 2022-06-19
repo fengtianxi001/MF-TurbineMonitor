@@ -19,6 +19,7 @@ export function useTurbine(element: Ref<HTMLElement>) {
     forEach(percents, (value) => (result += value));
     return result / 3;
   });
+
   const loading = computed(() => {
     return percent.value >= 100;
   });
@@ -109,7 +110,7 @@ export function useTurbine(element: Ref<HTMLElement>) {
   const _loadTurbineEquipments = async () => {
     const { scene: object } = await loadGLTF(
       "equipment.glb",
-      (percent) => (percents.skeleton = percent)
+      (percent) => (percents.equipment = percent)
     );
     document.addEventListener("click", (e) => {
       _equipmentOnClick(e, object);

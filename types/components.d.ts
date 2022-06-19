@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BaseLoading: typeof import('./../src/components/BaseLoading.vue')['default']
     BaseLogo: typeof import('./../src/components/BaseLogo.vue')['default']
     BaseMessageList: typeof import('./../src/components/BaseMessageList.vue')['default']
     BasePanel: typeof import('./../src/components/BasePanel.vue')['default']
