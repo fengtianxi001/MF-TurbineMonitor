@@ -1,12 +1,12 @@
 <template>
+  <BaseLoading v-show="!loading"> Loading: {{ Number(percent).toFixed(2) }} % </BaseLoading>
   <div class="custom-three" ref="threeRef"></div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
-import { useTurbine } from "@/hooks/useTurbine";
-const threeRef = ref();
-const loadPercent = ref(0);
-const { loading, percent } = useTurbine(threeRef);
+import { ref } from 'vue'
+import { useTurbine } from '@/hooks/useTurbine'
+const threeRef = ref()
+const { loading, percent } = useTurbine(threeRef)
 </script>
 <style>
 .custom-three {
