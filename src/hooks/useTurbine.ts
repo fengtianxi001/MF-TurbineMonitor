@@ -71,6 +71,7 @@ export function useTurbine(element: Ref<HTMLElement>) {
     const url = `${import.meta.env.VITE_API_DOMAIN}/model/plane.glb`
     const onProgress = (percent: number) => {}
     const { scene: object } = await threeBase.loadGLTF(url, onProgress)
+    //@ts-ignore
     const texture = object.children[0].material.map
     texture.wrapS = THREE.RepeatWrapping
     texture.wrapT = THREE.RepeatWrapping
