@@ -5,17 +5,31 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BaseBrand: typeof import('./../src/components/BaseBrand/index.vue')['default']
+    BaseLayout: typeof import('./../src/components/BaseLayout/index.vue')['default']
+    BaseList: typeof import('./../src/components/BaseList/index.vue')['default']
+    BaseListListItem: typeof import('./../src/components/BaseList/ListItem.vue')['default']
     BaseLoading: typeof import('./../src/components/BaseLoading.vue')['default']
-    BaseLogo: typeof import('./../src/components/BaseLogo.vue')['default']
     BaseMessageList: typeof import('./../src/components/BaseMessageList.vue')['default']
-    BasePanel: typeof import('./../src/components/BasePanel.vue')['default']
+    BasePanel: typeof import('./../src/components/BasePanel/index.vue')['default']
     DashboardActive: typeof import('./../src/components/dashboardActive.vue')['default']
+    DashBoardActiveMonitor: typeof import('./../src/components/DashBoard/ActiveMonitor/index.vue')['default']
     DashboardEnergy: typeof import('./../src/components/DashboardEnergy.vue')['default']
+    DashBoardEnergyMonitor: typeof import('./../src/components/DashBoard/EnergyMonitor/index.vue')['default']
+    DashBoardEnvMonitor: typeof import('./../src/components/DashBoard/EnvMonitor/index.vue')['default']
+    DashBoardEnvMonitorEnvMonitor: typeof import('./../src/components/DashBoard/EnvMonitor/EnvMonitor.vue')['default']
     DashboardError: typeof import('./../src/components/DashboardError.vue')['default']
+    DashBoardErrorMonitor: typeof import('./../src/components/DashBoard/ErrorMonitor/index.vue')['default']
+    DashBoardStatisticsMonitor: typeof import('./../src/components/DashBoard/StatisticsMonitor/index.vue')['default']
     DashboardTemperature: typeof import('./../src/components/DashboardTemperature.vue')['default']
     DashboardTotalParams: typeof import('./../src/components/DashboardTotalParams.vue')['default']
     DashboardTurbine: typeof import('./../src/components/DashboardTurbine.vue')['default']
+    DashBoardTurbineMonitor: typeof import('./../src/components/DashBoard/TurbineMonitor/index.vue')['default']
+    DashBoardTurbineMonitorDashboardTurbine: typeof import('./../src/components/DashBoard/TurbineMonitor/DashboardTurbine.vue')['default']
     DashboardYawAngle: typeof import('./../src/components/DashboardYawAngle.vue')['default']
+    DashBoardYawAngleMonitor: typeof import('./../src/components/DashBoard/YawAngleMonitor/index.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
   }
 }
 

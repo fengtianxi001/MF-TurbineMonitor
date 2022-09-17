@@ -1,12 +1,9 @@
-type ConfigType = Array<{
-  label: string;
-  value: number | string;
-}>;
-export function horizontalBar(config: ConfigType): echarts.EChartsCoreOption {
-  const label = config.map(({ label }) => label);
-  const data = config.map(({ value }) => value);
+import { EnergyListItemType } from '../../../apis/types'
+export function createChartOptions(config: EnergyListItemType[]): echarts.EChartsCoreOption {
+  const label = config.map(({ label }) => label)
+  const data = config.map(({ value }) => value)
   return {
-    color: ["#15c4e7"],
+    color: ['#15c4e7'],
     grid: {
       left: 70,
       right: 10,
@@ -14,12 +11,12 @@ export function horizontalBar(config: ConfigType): echarts.EChartsCoreOption {
       top: 0,
     },
     xAxis: {
-      type: "value",
+      type: 'value',
       show: false,
       max: 100,
     },
     yAxis: {
-      type: "category",
+      type: 'category',
       data: label,
       axisTick: {
         show: false,
@@ -30,7 +27,7 @@ export function horizontalBar(config: ConfigType): echarts.EChartsCoreOption {
       axisLine: {
         show: false,
         lineStyle: {
-          color: "#fff",
+          color: '#fff',
         },
       },
       inverse: true,
@@ -41,35 +38,20 @@ export function horizontalBar(config: ConfigType): echarts.EChartsCoreOption {
     series: [
       {
         data,
-        type: "bar",
+        type: 'bar',
         showBackground: true,
         realtimeSort: true,
         barCategoryGap: 11,
         label: {
           show: true,
-          position: "right",
+          position: 'right',
           valueAnimation: true,
         },
       },
     ],
     animationDuration: 0,
     animationDurationUpdate: 1000,
-    animationEasing: "linear",
-    animationEasingUpdate: "linear",
-  };
+    animationEasing: 'linear',
+    animationEasingUpdate: 'linear',
+  }
 }
-
-export const defaultChartValue = [
-  {
-    label: "环境温度",
-    value: 50,
-  },
-  {
-    label: "机舱温度",
-    value: 60,
-  },
-  {
-    label: "齿轮箱温度",
-    value: 70,
-  },
-];
