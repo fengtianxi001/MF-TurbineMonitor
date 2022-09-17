@@ -18,8 +18,6 @@ declare module '@vue/runtime-core' {
     DashBoardStatisticsMonitor: typeof import('./../src/components/DashBoard/StatisticsMonitor/index.vue')['default']
     DashBoardTurbineMonitor: typeof import('./../src/components/DashBoard/TurbineMonitor/index.vue')['default']
     DashBoardYawAngleMonitor: typeof import('./../src/components/DashBoard/YawAngleMonitor/index.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
   }
 }
 
