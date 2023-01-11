@@ -1,6 +1,6 @@
 # 🍪 TURBINE-LARGE-SCREEN
 
-> 一个模仿图扑风机大屏的DEMO案例, 服务地址:https://fengtianxi001.github.io/THREE-TurbineMonitor
+> 一个模仿图扑风机大屏的DEMO案例, 服务地址:https://fengtianxi001.github.io/MF-TurbineMonitor
 
 ## 项目说明
 
