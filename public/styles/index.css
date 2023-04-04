@@ -1,0 +1,14 @@
+@font-face {
+  font-family: DingTalkSans;
+  src: url('../fonts/DingTalkJinBuTi.woff2');
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-style: normal;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: DingTalkSans;
+}
