@@ -5,7 +5,7 @@
 > 服务地址 :https://fengtianxi001.github.io/MF-TurbineMonitor
 
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/fengtianxi001/THREE-TurbineMonitor/main/screenshot/1.png" title="mf-gif">
+  <img src="https://raw.githubusercontent.com/fengtianxi001/MF-TurbineMonitor/v3.0.0/screenshot/screenshot.png" title="screenshot">
 </h1>
 
 ## 项目说明
