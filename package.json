@@ -1,0 +1,77 @@
+{
+  "name": "mf-turbinemonitor",
+  "version": "3.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint --fix --ext .js,.vue,jsx,ts,tsx src",
+    "format": "prettier --write src/",
+    "lint:style": "stylelint **/*.{html,vue,css,sass,scss} --fix",
+    "prettier:format": "prettier --config .prettierrc.cjs  --ext .js,.vue,jsx,ts,tsx src --write"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "23.1.1",
+    "animate.css": "^4.1.1",
+    "autofit.js": "^3.0.7",
+    "dayjs": "^1.11.13",
+    "echarts": "^5.4.3",
+    "gsap": "^3.12.5",
+    "lodash": "^4.17.21",
+    "mockjs": "^1.1.0",
+    "three": "^0.170.0",
+    "uuid": "^11.0.3",
+    "vue": "^3.3.11"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@types/lodash": "^4.14.202",
+    "@types/mockjs": "^1.0.10",
+    "@types/node": "^18.19.3",
+    "@types/three": "^0.171.0",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vue/tsconfig": "^0.5.0",
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.11.0",
+    "npm-run-all2": "^6.1.1",
+    "postcss": "^8.4.23",
+    "postcss-html": "^1.5.0",
+    "prettier": "^2.8.8",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "sass": "^1.70.0",
+    "stylelint": "^14.15.0",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "typescript": "~5.3.0",
+    "vite": "^5.0.10",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-imagemin": "^0.6.1",
+    "vite-plugin-stylelint": "^4.3.0",
+    "vue-tsc": "^1.8.25"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": [
+      "yarn lint",
+      "yarn prettier:format"
+    ],
+    "*.{html,css,sass,scss,vue}": [
+      "yarn lint:style"
+    ]
+  },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+  }
+}
