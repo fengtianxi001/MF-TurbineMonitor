@@ -1,0 +1,26 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  // "include": [
+  //   "src/types/env.d.ts",
+  //   "src/types/axios.d.ts",
+  //   "src/**/*",
+  //   "src/**/*.vue"
+  // ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*"
+  ],
+  "exclude": ["node_modules", "dist", "**/*.js", "docs"],
+  // "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

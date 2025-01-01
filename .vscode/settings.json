@@ -1,0 +1,53 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.markdownlint": "explicit"
+  },
+  "stylelint.validate": ["css", "scss", "less", "vue"],
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[ts]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "vue.features.codeActions.enable": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".env*,.eslint*,package*,.prettier*,.stylelint*,commitlint*,pnpm*,ts*,yarn*,.git*,index.html,nginx.conf,Dockerfile,docker-compose.yml,env.d.ts"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.gitignore": true,
+    "**/.idea": true,
+    "**/.svn": true,
+    "**/.vscode": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/tmp": true,
+    "**/yarn.lock": true,
+    "**/assets": true,
+    "**/*.md": true,
+    "**/pnpm-lock.yaml": true,
+    "**/package.json": true
+  },
+  "vue.codeActions.enabled": false,
+  "liveServer.settings.port": 5501
+}
