@@ -68,10 +68,12 @@ export function useTurbine() {
     camera,
     ocontrol,
     outlinePass,
+    hexPass,
     loadGltf,
     loadAnimationMixer,
     loadCSS2DByVue,
     addModelPick,
+    addModelHoverPick,
     addOutlineEffect,
     transitionAnimation,
     planeClippingAnimation,
@@ -104,7 +106,7 @@ export function useTurbine() {
     await loadModels() // 加载风机模型
     loadLights() // 加载灯光
     await openingAnimation() // 开场动画
-    addOutlineEffect()
+
     addModelPick(models.equipment, (intersects) => {
       if (intersects.length > 0) {
         const obj = intersects[0]['object']
@@ -113,6 +115,14 @@ export function useTurbine() {
       } else {
         current.value = ''
         outlinePass.value!.selectedObjects = []
+      }
+    })
+    addModelHoverPick(models.equipment, (intersects) => {
+      if (intersects.length > 0) {
+        const obj = intersects[0]['object']
+        hexPass.value!.selectedObjects = [obj]
+      } else {
+        hexPass.value!.selectedObjects = []
       }
     })
   }
