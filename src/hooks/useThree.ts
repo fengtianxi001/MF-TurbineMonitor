@@ -1,5 +1,4 @@
 import {
-  onMounted,
   ref,
   shallowRef,
   nextTick,
@@ -8,7 +7,6 @@ import {
   createVNode,
   render,
   h,
-  type DefineComponent,
 } from 'vue'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js'
@@ -21,10 +19,8 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { isFunction } from 'lodash'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js'
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js'
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
-import { FXAAShader } from 'three/addons/shaders/FXAAShader.js'
 // import TWEEN from '@tweenjs/tween.js'
 import TWEEN from 'three/examples/jsm/libs/tween.module.js'
 import * as THREE from 'three'
@@ -45,6 +41,7 @@ export function useThree() {
   const ocontrol = shallowRef<OrbitControls>() //轨道控制器
   const tcontrol = shallowRef<TransformControls>() //变换控制器
   const outlinePass = shallowRef<OutlinePass>() //outlinePass
+  const hexPass = shallowRef()
   const composers = new Map() //后期处理
   const mixers: any = [] //动画混合器
   const clock = new THREE.Clock() //时钟
@@ -61,6 +58,8 @@ export function useThree() {
     boostrapLights()
     onAnimate()
     onWindowResize()
+    addOutlineEffect()
+    addHexEffect()
   }
   //Scene
   const boostrapScene = () => {
@@ -202,7 +201,7 @@ export function useThree() {
       render(instance, document.createElement('div'))
       return instance.el
     }
-    const element = crender(component, props)
+    const element = crender(component, props) as HTMLElement
     const css2dObject = new CSS2DObject(element)
     return css2dObject
   }
@@ -268,7 +267,15 @@ export function useThree() {
     })
   }
   //添加outline效果
-  const addOutlineEffect = () => {
+  const addOutlineEffect = (config?: {
+    edgeStrength?: number
+    edgeGlow?: number
+    edgeThickness?: number
+    pulsePeriod?: number
+    usePatternTexture?: boolean
+    visibleEdgeColor?: string | number
+    hiddenEdgeColor?: string | number
+  }) => {
     const composer = new EffectComposer(renderer.value!)
     const renderPass = new RenderPass(scene.value!, camera.value!)
     composer.addPass(renderPass)
@@ -277,16 +284,48 @@ export function useThree() {
       scene.value!,
       camera.value!
     )
-    outlinePass.value.edgeStrength = 3
-    outlinePass.value.edgeGlow = 1
-    outlinePass.value.edgeThickness = 4
-    outlinePass.value.visibleEdgeColor.set('#0efaa6')
-    outlinePass.value.hiddenEdgeColor.set('#0efaa6')
+    const deafultConfig = {
+      edgeStrength: 3,
+      edgeGlow: 0,
+      edgeThickness: 1,
+      pulsePeriod: 0,
+      usePatternTexture: false,
+      visibleEdgeColor: '#fff',
+      hiddenEdgeColor: '#fff',
+    }
+    const op = Object.assign({}, deafultConfig, config)
+
+    outlinePass.value.edgeStrength = op.edgeStrength
+    outlinePass.value.edgeGlow = op.edgeGlow
+    outlinePass.value.edgeThickness = op.edgeThickness
+    outlinePass.value.visibleEdgeColor.set(op.visibleEdgeColor)
+    outlinePass.value.hiddenEdgeColor.set(op.hiddenEdgeColor)
     outlinePass.value.selectedObjects = []
     composer.addPass(outlinePass.value)
     const outputPass = new OutputPass()
     composer.addPass(outputPass)
     composers.set('outline', composer)
+  }
+  //添加outline效果
+  const addHexEffect = (color?: number | string) => {
+    let selected: any[] = []
+    hexPass.value = {
+      get selectedObjects() {
+        return selected
+      },
+      set selectedObjects(val) {
+        //先清空之前的
+        selected.forEach((mesh) => {
+          if (mesh.material) mesh.material.emissive.setHex(mesh.hex)
+        })
+        val.forEach((mesh) => {
+          mesh.material = mesh.material.clone()
+          mesh.hex = mesh.material.emissive.getHex()
+          mesh.material.emissive.setHex(color ?? 0x888888)
+        })
+        selected = [...val]
+      },
+    }
   }
 
   // 模型拾取
@@ -315,6 +354,32 @@ export function useThree() {
     onUnmounted(() => document.removeEventListener('click', handler))
   }
 
+  // 模型悬浮拾取
+  const addModelHoverPick = (
+    object: THREE.Object3D,
+    callback: (
+      intersects:
+        | THREE.Intersection<THREE.Object3D<THREE.Object3DEventMap>>[]
+        | []
+    ) => void
+  ) => {
+    const handler = (event: MouseEvent) => {
+      const el = container.value as HTMLElement
+      const rect = el.getBoundingClientRect()
+      const mouse = new THREE.Vector2(
+        ((event.clientX - rect.left) / rect.width) * 2 - 1,
+        -((event.clientY - rect.top) / rect.height) * 2 + 1
+      )
+      const raycaster = new THREE.Raycaster()
+      raycaster.setFromCamera(mouse, camera.value!)
+      const intersects = raycaster.intersectObject(object, true)
+      isFunction(callback) && callback(intersects)
+      // if (intersects.length <= 0) return void 0
+    }
+    document.addEventListener('mousemove', handler)
+    onUnmounted(() => document.removeEventListener('mousemove', handler))
+  }
+
   nextTick(() => {
     boostrap()
   })
@@ -331,6 +396,7 @@ export function useThree() {
     renderMixins,
     composers,
     outlinePass,
+    hexPass,
     loadGltf,
     loadAnimationMixer,
     loadAxesHelper,
@@ -339,7 +405,9 @@ export function useThree() {
     transitionAnimation,
     planeClippingAnimation,
     addModelPick,
+    addModelHoverPick,
     addOutlineEffect,
+    addHexEffect,
   }
 }
 
