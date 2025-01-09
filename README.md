@@ -6,6 +6,7 @@
 
 <h1 align="center">
   <img src="https://github.com/fengtianxi001/MF-TurbineMonitor/blob/master/screenshots/screenshot01.png?raw=true" title="screenshot">
+  <img src="https://github.com/fengtianxi001/MF-TurbineMonitor/blob/master/screenshots/screenshot02.gif?raw=true" title="screenshot">
 </h1>
 
 ## 更新日志
