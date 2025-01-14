@@ -78,7 +78,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   height: 80px;
-  background-image: url(@/assets/title_bg.png);
+  background-image: url(@/assets/images/title_bg.png);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: 100% 100%;
@@ -90,7 +90,7 @@ onUnmounted(() => {
     width: 500px;
     height: 100px;
     content: '';
-    background-image: url(@/assets/light_bg.png);
+    background-image: url(@/assets/images/light_bg.png);
     background-repeat: no-repeat;
     background-size: contain;
     animation: light-go 3s ease-in-out infinite forwards;

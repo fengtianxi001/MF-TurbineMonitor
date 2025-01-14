@@ -35,7 +35,7 @@ const props = defineProps<PropsType>()
   .loading-gif {
     width: 1000px;
     height: 250px;
-    background-image: url('@/assets/loading.gif');
+    background-image: url('@/assets/images/loading.gif');
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }

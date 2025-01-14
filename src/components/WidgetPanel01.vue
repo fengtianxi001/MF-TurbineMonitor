@@ -4,9 +4,9 @@
   </LayoutPanel>
 </template>
 <script setup lang="ts">
-import LayoutPanel from './LayoutPanel.vue'
 import { nextTick, onMounted } from 'vue'
-import useEcharts from '@/hooks/useEcharts'
+import { LayoutPanel } from '@/layout'
+import { useEcharts } from '@/hooks'
 
 const { container, echarts, setOption } = useEcharts()
 
