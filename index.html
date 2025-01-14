@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="/fontawesome/css/all.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="app-loading">
+        <img class="app-loading-icon" src="/images/spin.svg" alt="" />
+        <div class="app-loading-title">正在加载资源</div>
+        <div class="app-loading-subtitle">
+          初次加载资源可能需要较长时间,请耐心等待
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
