@@ -19,7 +19,7 @@ const props = defineProps<PropsType>()
   position: relative;
   height: 100%;
   color: #fff;
-  background-image: url('@/assets/panel_body_bg.png');
+  background-image: url('@/assets/images/panel_body_bg.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   .panel-header {
@@ -27,7 +27,7 @@ const props = defineProps<PropsType>()
     align-items: center;
     height: 65px;
     font-family: Douyu;
-    background-image: url('@/assets/panel_title_bg.png');
+    background-image: url('@/assets/images/panel_title_bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     .panel-header-title {

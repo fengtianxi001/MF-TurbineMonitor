@@ -1,55 +1,34 @@
 <template>
-  <Layout :loading="loading">
-    <template #left>
-      <WidgetPanel04 title="参数监测" />
-      <WidgetPanel02 title="历史功率" />
-      <WidgetPanel03 title="日发电量监测 " />
-    </template>
-    <template #right>
-      <WidgetPanel07
-        v-show="current"
-        :title="current + '详情'"
-        :name="current"
-      />
-      <WidgetPanel06 v-show="!current" title="运行监测" />
-      <WidgetPanel01 title="故障对比" />
-      <WidgetPanel05 title="偏航角度监测" />
-    </template>
-    <template #middle>
-      <div style="width: 100%; height: 100%" ref="container"></div>
-    </template>
-  </Layout>
+  <div class="layout">
+    <LayoutHeader />
+    <LayoutFooter v-show="!loading.isLoading" />
+    <div class="layout-main">
+      <div class="main-left">
+        <slot name="left" />
+      </div>
+      <div class="main-right">
+        <slot name="right" />
+      </div>
+      <div class="main-middle" ref="container">
+        <LayoutLoading :loading="loading" />
+        <slot name="middle" />
+      </div>
+    </div>
+  </div>
 </template>
 <script setup lang="ts">
-import {
-  WidgetPanel01,
-  WidgetPanel02,
-  WidgetPanel03,
-  WidgetPanel04,
-  WidgetPanel05,
-  WidgetPanel06,
-  WidgetPanel07,
-} from '@/components'
-import { provide } from 'vue'
-import { Layout } from '@/layout'
-import { useTurbine } from '@/hooks/useTurbine'
+import LayoutHeader from '@/layout/LayoutHeader.vue'
+import LayoutFooter from '@/layout/LayoutFooter.vue'
+import LayoutLoading from '@/layout/LayoutLoading.vue'
 
-const {
-  container,
-  loading,
-  current,
-  eqDecomposeAnimation,
-  eqComposeAnimation,
-  startWarning,
-  stopWarning,
-} = useTurbine()
-
-provide('events', {
-  eqDecomposeAnimation,
-  eqComposeAnimation,
-  startWarning,
-  stopWarning,
-})
+interface PropsType {
+  loading: {
+    total: number // 全部
+    loaded: number // 已加载
+    isLoading: boolean // 执行状态
+  }
+}
+const props = defineProps<PropsType>()
 </script>
 <style lang="scss" scoped>
 .layout {

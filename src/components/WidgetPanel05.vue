@@ -18,7 +18,7 @@
   </LayoutPanel>
 </template>
 <script setup lang="ts">
-import LayoutPanel from './LayoutPanel.vue'
+import { LayoutPanel } from '@/layout'
 import { ref, onMounted } from 'vue'
 import { Random } from 'mockjs'
 

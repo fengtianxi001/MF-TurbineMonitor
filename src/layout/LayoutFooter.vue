@@ -92,7 +92,7 @@ const decomposeStyle = computed(() => {
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-image: url('@/assets/footer_bg.png');
+  background-image: url('@/assets/images/footer_bg.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   .item {
@@ -104,7 +104,7 @@ const decomposeStyle = computed(() => {
     font-family: Douyu;
     color: #fff;
     cursor: pointer;
-    background-image: url('@/assets/footer_item_bg.png');
+    background-image: url('@/assets/images/footer_item_bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }

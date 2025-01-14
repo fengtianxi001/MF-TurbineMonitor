@@ -9,8 +9,8 @@
   </LayoutPanel>
 </template>
 <script setup lang="ts">
-import LayoutPanel from './LayoutPanel.vue'
-import { computed, onMounted } from 'vue'
+import { LayoutPanel } from '@/layout'
+import { computed } from 'vue'
 
 interface PropsType {
   name: string

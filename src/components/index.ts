@@ -1,0 +1,8 @@
+export { default as WidgetLabel } from './WidgetLabel.vue'
+export { default as WidgetPanel01 } from './WidgetPanel01.vue'
+export { default as WidgetPanel02 } from './WidgetPanel02.vue'
+export { default as WidgetPanel03 } from './WidgetPanel03.vue'
+export { default as WidgetPanel04 } from './WidgetPanel04.vue'
+export { default as WidgetPanel05 } from './WidgetPanel05.vue'
+export { default as WidgetPanel06 } from './WidgetPanel06.vue'
+export { default as WidgetPanel07 } from './WidgetPanel07.vue'
