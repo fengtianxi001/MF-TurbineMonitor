@@ -32,7 +32,7 @@ import {
 } from '@/components'
 import { provide } from 'vue'
 import { Layout } from '@/layout'
-import { useTurbine } from '@/hooks/useTurbine'
+import { useTurbine } from '@/hooks'
 
 const {
   container,
@@ -51,62 +51,3 @@ provide('events', {
   stopWarning,
 })
 </script>
-<style lang="scss" scoped>
-.layout {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  .layout-main {
-    position: relative;
-    width: 100%;
-    height: calc(100% - 80px);
-    background-color: #05326a;
-    background-image: url(@/assets/images/grid_bg_01.png);
-    background-repeat: repeat;
-    .main-left {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 999;
-      box-sizing: border-box;
-      display: grid;
-      grid-template-rows: repeat(3, calc((100% - 40px) / 3));
-      grid-gap: 20px;
-      width: 420px;
-      height: calc(100% - 20px);
-    }
-    .main-right {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 999;
-      box-sizing: border-box;
-      display: grid;
-      grid-template-rows: repeat(3, calc((100% - 40px) / 3));
-      grid-gap: 20px;
-      width: 420px;
-      height: calc(100% - 20px);
-    }
-    .main-middle {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        z-index: 99;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        content: '';
-        background-image: radial-gradient(circle, transparent 30%, #000 70%);
-      }
-    }
-  }
-}
-</style>
