@@ -125,15 +125,10 @@ const generateOptions = (sources: any[][]) => {
 
 onMounted(() => {
   nextTick(() => {
-    // const sources = [
-    //   sampleSize(range(1000, 200), 12),
-    //   sampleSize(range(1000, 200), 12),
-    // ]
     const sources = [
       [859, 571, 612, 906, 866, 984, 212, 931, 749, 993, 276, 477],
       [598, 539, 861, 375, 576, 383, 896, 430, 315, 755, 808, 630],
     ]
-    // console.log('sources', sources)
     const options = generateOptions(sources)
     setOption(options)
   })
