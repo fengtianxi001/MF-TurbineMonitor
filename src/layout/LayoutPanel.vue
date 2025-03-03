@@ -26,7 +26,7 @@ const props = defineProps<PropsType>()
     display: flex;
     align-items: center;
     height: 65px;
-    font-family: Douyu;
+    font-family: DOUYUFont;
     background-image: url('@/assets/images/panel_title_bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
