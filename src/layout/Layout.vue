@@ -34,6 +34,7 @@ const props = defineProps<PropsType>()
 .layout {
   width: 100%;
   height: 100%;
+  font-family: 'Sarasa Mono SC';
   background-color: #000;
   .layout-main {
     position: relative;
