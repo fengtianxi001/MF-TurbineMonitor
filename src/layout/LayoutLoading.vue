@@ -40,7 +40,7 @@ const props = defineProps<PropsType>()
     background-size: 100% 100%;
   }
   .loading-tip {
-    // font-family: Douyu;
+    // font-family: DOUYUFont;
 
     // font-style: italic;
     // font-weight: bolder;

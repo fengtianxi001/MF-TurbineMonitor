@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: SarasaMonoTSCBoldItalic;
   src: url(../fonts/SarasaMonoTSCBoldItalic.woff2);
   font-weight: normal;
@@ -22,7 +22,7 @@
   font-family: PangMenZhengDaoBiaoTiTiMianFeiBan;
   src: url(../fonts/PangMenZhengDaoBiaoTiTiMianFeiBan.woff);
   font-weight: normal;
-}
+} */
 
 * {
   padding: 0;
@@ -34,7 +34,7 @@
   width: 100;
   height: 100%;
   overflow: hidden;
-  font-family: SarasaMonoTSCBoldItalic;
+  font-family: Sarasa Mono SC;
 }
 
 .app-loading {
