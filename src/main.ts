@@ -2,9 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import autofit from 'autofit.js'
 import 'animate.css'
-import * as a from '@/assets/fonts/SarasaMonoSC.ttf'
-import '@/assets/fonts/DouyuFont.ttf'
-console.log('a', a)
+
 const boostrap = async () => {
   const app = createApp(App)
   app.mount('#app')
