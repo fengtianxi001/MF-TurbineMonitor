@@ -9,7 +9,7 @@ import viteImagemin from 'vite-plugin-imagemin'
 export default defineConfig({
   base: './',
   build: {
-    // outDir: './docs',
+    outDir: './docs',
     rollupOptions: {
       output: {
         chunkFileNames: 'js/[name]-[hash].js', // 引入文件名的名称
