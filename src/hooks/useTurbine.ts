@@ -1,5 +1,5 @@
 import { nextTick, ref, reactive } from 'vue'
-import { forEach, random } from 'lodash'
+import { forEach, random } from 'lodash-es'
 import useThree from './useThree'
 import TWEEN from 'three/examples/jsm/libs/tween.module.js'
 import * as THREE from 'three'
