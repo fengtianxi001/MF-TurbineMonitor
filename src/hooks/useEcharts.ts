@@ -1,6 +1,24 @@
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
-import * as echarts from 'echarts'
+import * as echarts from 'echarts/core'
 import { isElement } from 'lodash-es'
+import { BarChart, LineChart } from 'echarts/charts'
+import {
+  TooltipComponent,
+  GridComponent,
+  LegendComponent,
+} from 'echarts/components'
+import { LabelLayout } from 'echarts/features'
+import { CanvasRenderer } from 'echarts/renderers'
+
+echarts.use([
+  TooltipComponent,
+  LegendComponent,
+  GridComponent,
+  BarChart,
+  LabelLayout,
+  CanvasRenderer,
+  LineChart,
+])
 
 /**
  * 用法如下
