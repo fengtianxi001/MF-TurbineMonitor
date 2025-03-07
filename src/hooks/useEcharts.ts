@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
 import * as echarts from 'echarts'
-import { isElement } from 'lodash'
+import { isElement } from 'lodash-es'
 
 /**
  * 用法如下

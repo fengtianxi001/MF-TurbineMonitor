@@ -103,7 +103,7 @@ onUnmounted(() => {
     justify-content: center;
     height: 100%;
     overflow-x: hidden;
-    font-family: DOUYUFont;
+    font-family: DouyuFont;
     color: #fff;
     .cn {
       font-size: 30px;
