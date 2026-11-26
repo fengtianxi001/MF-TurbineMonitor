@@ -26,3 +26,6 @@ coverage
 
 *.tsbuildinfo
 stats.html
+
+# GitHub Pages build output
+dist
