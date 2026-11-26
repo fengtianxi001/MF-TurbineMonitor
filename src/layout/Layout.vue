@@ -84,7 +84,11 @@ const props = defineProps<PropsType>()
         height: 100%;
         pointer-events: none;
         content: '';
-        background-image: radial-gradient(circle, transparent 30%, #000 70%);
+        background-image: radial-gradient(
+          circle,
+          transparent 35%,
+          rgb(0 0 0 / 72%) 100%
+        );
       }
     }
   }

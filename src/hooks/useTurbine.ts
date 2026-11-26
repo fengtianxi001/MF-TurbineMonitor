@@ -203,6 +203,8 @@ export function useTurbine() {
 
   //设备分解动画: 外壳削切 => 设备分离 => 显示标签/摄像头转动
   const eqDecomposeAnimation = () => {
+    if (isAnimation.value) return Promise.resolve()
+
     return new Promise((resolve) => {
       //先确保白色外壳隐藏
       skeletons.color.visible = false
@@ -220,16 +222,15 @@ export function useTurbine() {
       })
 
       //可以每个部件创建一个动画，这里为了更好控制进程避免使用settimeout，只使用一个动画(更麻烦)
-      const from: any = {}
-      const to: any = {}
+      const from: Record<string, number> = {}
+      const to: Record<string, number> = {}
 
       forEach(models.equipment.children, (mesh, index) => {
         const name = mesh.name as keyof typeof CONFIG.EQUIPMENT_POSITION
         const decompose = CONFIG.EQUIPMENT_POSITION[name]['DECOMPOSE']
-        const compose = CONFIG.EQUIPMENT_POSITION[name]['COMPOSE']
-        from[`x${index}`] = compose.x
-        from[`y${index}`] = compose.y
-        from[`z${index}`] = compose.z
+        from[`x${index}`] = mesh.position.x
+        from[`y${index}`] = mesh.position.y
+        from[`z${index}`] = mesh.position.z
         to[`x${index}`] = decompose.x
         to[`y${index}`] = decompose.y
         to[`z${index}`] = decompose.z
@@ -272,6 +273,8 @@ export function useTurbine() {
 
   //设备组合动画: 隐藏标签 => 设备组合 => 外壳还原
   const eqComposeAnimation = () => {
+    if (isAnimation.value) return Promise.resolve()
+
     return new Promise((resolve) => {
       isAnimation.value = true
       removeEquipmentLabel()
@@ -287,16 +290,15 @@ export function useTurbine() {
         },
       })
       cameraAnimate.start()
-      const from: any = {}
-      const to: any = {}
+      const from: Record<string, number> = {}
+      const to: Record<string, number> = {}
 
       forEach(models.equipment.children, (mesh, index) => {
         const name = mesh.name as keyof typeof CONFIG.EQUIPMENT_POSITION
-        const decompose = CONFIG.EQUIPMENT_POSITION[name]['DECOMPOSE']
         const compose = CONFIG.EQUIPMENT_POSITION[name]['COMPOSE']
-        from[`x${index}`] = decompose.x
-        from[`y${index}`] = decompose.y
-        from[`z${index}`] = decompose.z
+        from[`x${index}`] = mesh.position.x
+        from[`y${index}`] = mesh.position.y
+        from[`z${index}`] = mesh.position.z
         to[`x${index}`] = compose.x
         to[`y${index}`] = compose.y
         to[`z${index}`] = compose.z

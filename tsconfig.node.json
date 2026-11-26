@@ -12,6 +12,6 @@
     "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node", "vite-plugin-font/src/font"]
+    "types": ["node"]
   }
 }

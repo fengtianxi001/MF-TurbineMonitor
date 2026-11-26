@@ -8,9 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint --fix --ext .js,.vue,jsx,ts,tsx src",
+    "lint": "eslint --ext .js,.vue,jsx,ts,tsx src",
+    "lint:fix": "eslint --fix --ext .js,.vue,jsx,ts,tsx src",
     "format": "prettier --write src/",
-    "lint:style": "stylelint **/*.{html,vue,css,sass,scss} --fix",
+    "lint:style": "stylelint \"src/**/*.{vue,css,scss}\"",
+    "lint:style:fix": "stylelint \"src/**/*.{vue,css,scss}\" --fix",
     "prettier:format": "prettier --config .prettierrc.cjs  --ext .js,.vue,jsx,ts,tsx src --write"
   },
   "dependencies": {
@@ -28,6 +30,8 @@
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@types/lodash-es": "^4.17.12",
     "@types/mockjs": "^1.0.10",
     "@types/node": "^18.19.3",
@@ -46,7 +50,6 @@
     "postcss": "^8.4.23",
     "postcss-html": "^1.5.0",
     "prettier": "^2.8.8",
-    "rollup-plugin-visualizer": "^5.12.0",
     "sass": "^1.70.0",
     "stylelint": "^14.15.0",
     "stylelint-config-prettier": "^9.0.4",
@@ -57,7 +60,6 @@
     "typescript": "~5.3.0",
     "vite": "^5.0.10",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-stylelint": "^4.3.0",
     "vue-tsc": "^1.8.25"
   },
   "lint-staged": {

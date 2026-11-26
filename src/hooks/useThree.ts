@@ -48,7 +48,9 @@ export function useThree() {
   const renderMixins = new Map() //渲染混合器
   const dracoLoader = new DRACOLoader() //draco加载器
   dracoLoader.setDecoderPath(CONFIG.DECODER_PATH)
-  dracoLoader.setDecoderConfig({ type: 'js' })
+  dracoLoader.setDecoderConfig({ type: 'wasm' })
+  let animationFrameId: number | undefined
+  let isDisposed = false
 
   const boostrap = () => {
     boostrapScene()
@@ -82,8 +84,11 @@ export function useThree() {
     const { clientWidth, clientHeight } = container.value!
     //Renderer
     renderer.value = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    renderer.value.outputColorSpace = THREE.SRGBColorSpace
+    renderer.value.toneMapping = THREE.ACESFilmicToneMapping
+    renderer.value.toneMappingExposure = 1.1
     renderer.value.shadowMap.enabled = false
-    // renderer.value.outputEncoding = THREE.sRGBEncoding
+    renderer.value.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.value.setSize(clientWidth, clientHeight)
     renderer.value.localClippingEnabled = true
     renderer.value.setClearAlpha(0.5)
@@ -139,6 +144,7 @@ export function useThree() {
   //窗口大小变化时重新设置渲染器大小
   const onWindowResize = () => {
     const handleResize = () => {
+      if (!container.value || !camera.value || !renderer.value || !cssRenderer.value) return
       const { clientWidth, clientHeight } = container.value!
       camera.value!.aspect = clientWidth / clientHeight
       camera.value!.updateProjectionMatrix()
@@ -146,23 +152,57 @@ export function useThree() {
       cssRenderer.value!.setSize(clientWidth, clientHeight)
       ocontrol.value!.update()
     }
-    window.addEventListener('resize', handleResize)
+    const resizeObserver = new ResizeObserver(handleResize)
+    resizeObserver.observe(container.value!)
     onUnmounted(() => {
-      window.removeEventListener('resize', handleResize)
+      resizeObserver.disconnect()
     })
   }
   //渲染循环
   const onAnimate = () => {
-    const delta = new THREE.Clock().getDelta()
-    renderer.value!.render(scene.value!, camera.value!)
-    const mixerUpdateDelta = clock.getDelta()
-    mixers.forEach((mixer: any) => mixer.update(mixerUpdateDelta))
+    if (isDisposed) return
+
+    const delta = clock.getDelta()
+    mixers.forEach((mixer: any) => mixer.update(delta))
     composers.forEach((composer) => composer.render(delta))
+    if (composers.size === 0) renderer.value!.render(scene.value!, camera.value!)
     renderMixins.forEach((mixin) => isFunction(mixin) && mixin())
     cssRenderer.value!.render(scene.value!, camera.value!)
     TWEEN.update()
-    requestAnimationFrame(() => onAnimate())
+    animationFrameId = requestAnimationFrame(onAnimate)
   }
+
+  const disposeObject = (object: THREE.Object3D) => {
+    object.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return
+
+      child.geometry.dispose()
+      const materials = Array.isArray(child.material)
+        ? child.material
+        : [child.material]
+      materials.forEach((material) => {
+        Object.values(material).forEach((value) => {
+          if (value instanceof THREE.Texture) value.dispose()
+        })
+        material.dispose()
+      })
+    })
+  }
+
+  onUnmounted(() => {
+    isDisposed = true
+    if (animationFrameId !== undefined) cancelAnimationFrame(animationFrameId)
+    mixers.forEach((mixer: THREE.AnimationMixer) => mixer.stopAllAction())
+    composers.forEach((composer) => composer.dispose())
+    ocontrol.value?.dispose()
+    tcontrol.value?.dispose()
+    if (scene.value) disposeObject(scene.value)
+    renderer.value?.dispose()
+    dracoLoader.dispose()
+    renderMixins.clear()
+    mixers.length = 0
+    composers.clear()
+  })
   //加载 GLTF/GLB 模型
   const loadGltf = (url: string): Promise<GLTF> => {
     const loader = new GLTFLoader()

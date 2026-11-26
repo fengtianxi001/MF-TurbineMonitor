@@ -1,9 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
-import { visualizer } from 'rollup-plugin-visualizer'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import stylelintPlugin from 'vite-plugin-stylelint'
 
 export default defineConfig({
   base: './',
@@ -27,8 +25,6 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    stylelintPlugin({ fix: true }),
-    visualizer({ open: true }),
   ],
   resolve: {
     alias: {

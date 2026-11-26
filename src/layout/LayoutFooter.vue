@@ -20,7 +20,7 @@ const state = reactive({
 const events = inject<any>('events')
 
 const warningHandle = async () => {
-  // if (state.isDecompose) return void 0
+  if (state.isDecompose || state.isDecomposeRuning) return
   state.isWarning = !state.isWarning
 
   if (state.isWarning) {
@@ -35,27 +35,24 @@ const warningHandle = async () => {
 }
 
 const decomposeHandle = async () => {
-  // if (state.isWarning) return void 0
+  if (state.isWarning) return
   if (state.isDecomposeRuning) return void 0
   state.isDecompose = !state.isDecompose
   state.isDecomposeRuning = true
-  if (state.isDecompose) {
-    await events.eqDecomposeAnimation()
-    state.isDecomposeRuning = false
-  } else {
-    await events.eqComposeAnimation()
+  try {
+    if (state.isDecompose) {
+      await events.eqDecomposeAnimation()
+    } else {
+      await events.eqComposeAnimation()
+    }
+  } finally {
     state.isDecomposeRuning = false
   }
 }
 
 const warningStyle = computed(() => {
   const style: any = {}
-  if (state.isDecompose) {
-    // style.cursor = 'not-allowed'
-    style.cursor = 'pointer'
-  } else {
-    style.cursor = 'pointer'
-  }
+  style.cursor = state.isDecompose ? 'not-allowed' : 'pointer'
 
   if (state.isWarning) {
     style.color = '#5bc7fa'

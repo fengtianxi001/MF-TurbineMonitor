@@ -106,12 +106,12 @@ onUnmounted(() => {
     font-family: DouyuFont;
     color: #fff;
     .cn {
-      font-size: 30px;
+      font-size: clamp(20px, 2vw, 30px);
       @include font-color;
     }
     .en {
       position: relative;
-      font-size: 10px;
+      font-size: clamp(8px, 0.7vw, 10px);
       @include font-color;
     }
   }

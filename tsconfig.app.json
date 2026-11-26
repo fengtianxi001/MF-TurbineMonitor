@@ -22,6 +22,5 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite-plugin-font/src/font"]
   }
 }

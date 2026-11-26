@@ -26,6 +26,7 @@ coverage
 
 *.tsbuildinfo
 stats.html
+.stylelintcache
 
 # GitHub Pages build output
 dist
