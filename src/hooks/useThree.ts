@@ -47,6 +47,7 @@ export function useThree() {
   const clock = new THREE.Clock() //时钟
   const renderMixins = new Map() //渲染混合器
   const dracoLoader = new DRACOLoader() //draco加载器
+  const disposers: Array<() => void> = []
   dracoLoader.setDecoderPath(CONFIG.DECODER_PATH)
   dracoLoader.setDecoderConfig({ type: 'wasm' })
   let animationFrameId: number | undefined
@@ -154,9 +155,7 @@ export function useThree() {
     }
     const resizeObserver = new ResizeObserver(handleResize)
     resizeObserver.observe(container.value!)
-    onUnmounted(() => {
-      resizeObserver.disconnect()
-    })
+    disposers.push(() => resizeObserver.disconnect())
   }
   //渲染循环
   const onAnimate = () => {
@@ -191,6 +190,8 @@ export function useThree() {
 
   onUnmounted(() => {
     isDisposed = true
+    disposers.forEach((dispose) => dispose())
+    disposers.length = 0
     if (animationFrameId !== undefined) cancelAnimationFrame(animationFrameId)
     mixers.forEach((mixer: THREE.AnimationMixer) => mixer.stopAllAction())
     composers.forEach((composer) => composer.dispose())
@@ -374,11 +375,13 @@ export function useThree() {
     callback: (
       intersects:
         | THREE.Intersection<THREE.Object3D<THREE.Object3DEventMap>>[]
-        | []
+        | [],
+      event: MouseEvent
     ) => void
   ) => {
     const handler = (event: MouseEvent) => {
-      const el = container.value as HTMLElement
+      const el = container.value
+      if (!el || !camera.value) return
       const rect = el.getBoundingClientRect()
       const mouse = new THREE.Vector2(
         ((event.clientX - rect.left) / rect.width) * 2 - 1,
@@ -387,11 +390,11 @@ export function useThree() {
       const raycaster = new THREE.Raycaster()
       raycaster.setFromCamera(mouse, camera.value!)
       const intersects = raycaster.intersectObject(object, true)
-      isFunction(callback) && callback(intersects)
-      // if (intersects.length <= 0) return void 0
+      isFunction(callback) && callback(intersects, event)
     }
-    document.addEventListener('click', handler)
-    onUnmounted(() => document.removeEventListener('click', handler))
+    const element = renderer.value!.domElement
+    element.addEventListener('click', handler)
+    disposers.push(() => element.removeEventListener('click', handler))
   }
 
   // 模型悬浮拾取
@@ -400,11 +403,13 @@ export function useThree() {
     callback: (
       intersects:
         | THREE.Intersection<THREE.Object3D<THREE.Object3DEventMap>>[]
-        | []
+        | [],
+      event: MouseEvent
     ) => void
   ) => {
     const handler = (event: MouseEvent) => {
-      const el = container.value as HTMLElement
+      const el = container.value
+      if (!el || !camera.value) return
       const rect = el.getBoundingClientRect()
       const mouse = new THREE.Vector2(
         ((event.clientX - rect.left) / rect.width) * 2 - 1,
@@ -413,11 +418,11 @@ export function useThree() {
       const raycaster = new THREE.Raycaster()
       raycaster.setFromCamera(mouse, camera.value!)
       const intersects = raycaster.intersectObject(object, true)
-      isFunction(callback) && callback(intersects)
-      // if (intersects.length <= 0) return void 0
+      isFunction(callback) && callback(intersects, event)
     }
-    document.addEventListener('mousemove', handler)
-    onUnmounted(() => document.removeEventListener('mousemove', handler))
+    const element = renderer.value!.domElement
+    element.addEventListener('mousemove', handler)
+    disposers.push(() => element.removeEventListener('mousemove', handler))
   }
 
   nextTick(() => {

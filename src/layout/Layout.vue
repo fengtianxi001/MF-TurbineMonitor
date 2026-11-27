@@ -1,12 +1,15 @@
 <template>
-  <div class="layout">
-    <LayoutHeader />
-    <LayoutFooter v-show="!loading.isLoading" />
+  <div class="layout" :class="{ 'is-ready': !loading.isLoading }">
+    <LayoutHeader class="stage stage-header" />
+    <LayoutFooter
+      v-show="!loading.isLoading"
+      class="stage stage-footer"
+    />
     <div class="layout-main">
-      <div class="main-left">
+      <div class="main-left stage stage-left">
         <slot name="left" />
       </div>
-      <div class="main-right">
+      <div class="main-right stage stage-right">
         <slot name="right" />
       </div>
       <div class="main-middle" ref="container">
@@ -36,6 +39,33 @@ const props = defineProps<PropsType>()
   height: 100%;
   font-family: SarasaMonoSC;
   background-color: #000;
+  .stage {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &.is-ready {
+    .stage {
+      visibility: visible;
+      animation-duration: 0.8s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+    .stage-header {
+      animation-name: stage-header-in;
+    }
+    .stage-left {
+      animation-name: stage-left-in;
+      animation-delay: 0.3s;
+    }
+    .stage-right {
+      animation-name: stage-right-in;
+      animation-delay: 0.5s;
+    }
+    .stage-footer {
+      animation-name: stage-footer-in;
+      animation-delay: 0.75s;
+    }
+  }
   .layout-main {
     position: relative;
     width: 100%;
@@ -91,6 +121,57 @@ const props = defineProps<PropsType>()
         );
       }
     }
+  }
+}
+
+@keyframes stage-header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stage-left-in {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes stage-right-in {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes stage-footer-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout.is-ready .stage {
+    opacity: 1;
+    animation: none;
   }
 }
 </style>
